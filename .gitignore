@@ -1,0 +1,7 @@
+#MSVS
+.vs
+x64
+Release
+Debug
+OnBeat.vcxproj.user
+*.aps
