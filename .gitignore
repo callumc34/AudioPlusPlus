@@ -5,3 +5,6 @@ Release
 Debug
 OnBeat.vcxproj.user
 *.aps
+
+#local testing
+testing

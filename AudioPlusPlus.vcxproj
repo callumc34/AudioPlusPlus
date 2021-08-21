@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AudioPlusPlus.cpp" />
+    <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Device\Device.cpp" />
     <ClCompile Include="src\Device\DeviceManager.cpp" />
     <ClCompile Include="src\File\File.cpp" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AudioPlusPlus\AudioPlusPlus.h" />
+    <ClInclude Include="include\AudioPlusPlus\Config\Config.h" />
     <ClInclude Include="include\AudioPlusPlus\Device\Device.h" />
     <ClInclude Include="include\AudioPlusPlus\Device\DeviceManager.h" />
     <ClInclude Include="include\AudioPlusPlus\File\File.h" />
