@@ -17,6 +17,22 @@ namespace AudioPlusPlus
 
 	}
 
+	int Player::Play(File* file, Stream* stream, Device* device)
+	{
+		if (device == nullptr)
+			device = new Device(Pa_GetDefaultOutputDevice());
+
+		PaStreamParameters OutputParameters{
+			device->GetIndex(),
+			file->GetFileData().channels,
+			paFloat32,
+			device->GetInfo()->defaultLowOutputLatency,
+			NULL
+		};
+
+		return file->OpenStream(stream, OutputParameters);
+	}
+
 	Player::~Player()
 	{
 

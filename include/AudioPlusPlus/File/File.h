@@ -1,5 +1,8 @@
 #pragma once
 #include <AudioPlusPlus/Player/Stream.h>
+#include <windows.h>
+#define ENABLE_SNDFILE_WINDOWS_PROTOTYPES 1
+#include <sndfile.hh>
 #include <portaudio.h>
 #include <string>
 #include <functional>
@@ -18,28 +21,29 @@ namespace AudioPlusPlus
 
 	struct FileData
 	{
+		std::string path;
 		FileFormat format;
 		int length;
-		std::string path;
+		int sampleRate;
+		int bitDepth;
+		int channels;
 	};
 
-	class File
+	class File : private SndfileHandle
 	{
 		public:
-			File();
+			File(const std::string& path);
 			~File();
-
-			int OpenStream(Stream* stream, PaStreamParameters OutputParameters);
 
 			const FileData& GetFileData();
 
-			virtual int FillBuffer(
+			int FillBuffer(
 				const void* inputBuffer, void* outputBuffer,
 				unsigned long framesPerBuffer,
 				const PaStreamCallbackTimeInfo* timeInfo,
 				PaStreamCallbackFlags statusFlags,
 				void* userData
-			) = 0;
+			);
 
 			static int AudioCallback(
 				const void* inputBuffer, void* outputBuffer,
@@ -49,10 +53,11 @@ namespace AudioPlusPlus
 				void* userData
 			);
 
-			static File* Open(const std::string& path);
 			static int VerifyFile(const std::string& path);
 
 		private:
+			int OpenStream(Stream* stream, PaStreamParameters OutputParameters);
+			friend class Player;
 
 		protected:
 			FileData data;
