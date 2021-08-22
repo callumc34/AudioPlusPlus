@@ -41,6 +41,9 @@
     <ClCompile Include="src\Config\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\File\AIFF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AudioPlusPlus\Log\Log.h">
@@ -71,6 +74,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\AudioPlusPlus\Config\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AudioPlusPlus\File\AIFF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AudioPlusPlus\Files.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

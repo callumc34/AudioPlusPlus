@@ -8,3 +8,6 @@ OnBeat.vcxproj.user
 
 #local testing
 testing
+
+#log
+*.log

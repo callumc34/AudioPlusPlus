@@ -7,9 +7,9 @@ namespace AudioPlusPlus
 
 	}
 
-	PaStream* Stream::Get()
+	PaStream** Stream::Get()
 	{
-		return stream;
+		return &stream;
 	}
 
 	PaError Stream::Start()

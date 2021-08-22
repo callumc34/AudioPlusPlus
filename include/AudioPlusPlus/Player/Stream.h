@@ -9,7 +9,7 @@ namespace AudioPlusPlus
 			Stream();
 			~Stream();
 
-			PaStream* Get();
+			PaStream** Get();
 
 			PaError Start();
 			PaError Stop();

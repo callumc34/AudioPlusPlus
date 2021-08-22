@@ -3,10 +3,10 @@
 
 namespace AudioPlusPlus
 {
-	class WAV : public File
+	class AIFF : public File
 	{
 		public:
-			~WAV();
+			~AIFF();
 
 			int FillBuffer(
 				const void* inputBuffer, void* outputBuffer,
@@ -17,7 +17,7 @@ namespace AudioPlusPlus
 			) override;
 
 		private:
-			WAV(const std::string& path);
+			AIFF(const std::string& path);
 			friend class File;
 	};
 }

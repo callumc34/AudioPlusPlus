@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -117,6 +117,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>vendor/;vendor/spdlog/include/;vendor/portaudio/include/;include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>vendor/;vendor/spdlog/include/;vendor/portaudio/include/;include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +157,7 @@
     <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Device\Device.cpp" />
     <ClCompile Include="src\Device\DeviceManager.cpp" />
+    <ClCompile Include="src\File\AIFF.cpp" />
     <ClCompile Include="src\File\File.cpp" />
     <ClCompile Include="src\File\MP3.cpp" />
     <ClCompile Include="src\File\WAV.cpp" />
@@ -167,6 +170,8 @@
     <ClInclude Include="include\AudioPlusPlus\Config\Config.h" />
     <ClInclude Include="include\AudioPlusPlus\Device\Device.h" />
     <ClInclude Include="include\AudioPlusPlus\Device\DeviceManager.h" />
+    <ClInclude Include="include\AudioPlusPlus\Files.h" />
+    <ClInclude Include="include\AudioPlusPlus\File\AIFF.h" />
     <ClInclude Include="include\AudioPlusPlus\File\File.h" />
     <ClInclude Include="include\AudioPlusPlus\File\MP3.h" />
     <ClInclude Include="include\AudioPlusPlus\File\WAV.h" />

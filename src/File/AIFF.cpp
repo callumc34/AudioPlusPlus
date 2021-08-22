@@ -1,14 +1,14 @@
-#include <AudioPlusPlus/File/MP3.h>
+#include <AudioPlusPlus/File/AIFF.h>
 
 namespace AudioPlusPlus
 {
-	MP3::MP3(const std::string& path)
+	AIFF::AIFF(const std::string& path)
 	{
 		data.path = path;
-		data.format = FileFormat::MP3;
+		data.format = FileFormat::AIFF;
 	}
 
-	int MP3::FillBuffer(
+	int AIFF::FillBuffer(
 		const void* inputBuffer, void* outputBuffer,
 		unsigned long framesPerBuffer,
 		const PaStreamCallbackTimeInfo* timeInfo,
@@ -19,7 +19,7 @@ namespace AudioPlusPlus
 		return paContinue;
 	}
 
-	MP3::~MP3()
+	AIFF::~AIFF()
 	{
 
 	}
