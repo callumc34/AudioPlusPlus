@@ -4,3 +4,6 @@
 [submodule "vendor/portaudio"]
 	path = vendor/portaudio
 	url = https://github.com/portaudio/portaudio
+[submodule "vendor/libsndfile"]
+	path = vendor/libsndfile
+	url = git_as_callumc34:libsndfile/libsndfile.git
