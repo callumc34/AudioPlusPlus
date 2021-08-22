@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>vendor/;vendor/spdlog/include/;vendor/portaudio/include/;include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor/;vendor/spdlog/include/;vendor/portaudio/include/;vendor/libsndfile/include/;include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);</AdditionalDependencies>
       <Verbose>false</Verbose>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
@@ -137,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>vendor/;vendor/spdlog/include/;vendor/portaudio/include/;include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor/;vendor/spdlog/include/;vendor/portaudio/include/;vendor/libsndfile/include/;include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -147,7 +147,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);</AdditionalDependencies>
       <Verbose>false</Verbose>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
@@ -157,10 +157,7 @@
     <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Device\Device.cpp" />
     <ClCompile Include="src\Device\DeviceManager.cpp" />
-    <ClCompile Include="src\File\AIFF.cpp" />
     <ClCompile Include="src\File\File.cpp" />
-    <ClCompile Include="src\File\MP3.cpp" />
-    <ClCompile Include="src\File\WAV.cpp" />
     <ClCompile Include="src\Log\Log.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
     <ClCompile Include="src\Player\Stream.cpp" />
@@ -170,11 +167,7 @@
     <ClInclude Include="include\AudioPlusPlus\Config\Config.h" />
     <ClInclude Include="include\AudioPlusPlus\Device\Device.h" />
     <ClInclude Include="include\AudioPlusPlus\Device\DeviceManager.h" />
-    <ClInclude Include="include\AudioPlusPlus\Files.h" />
-    <ClInclude Include="include\AudioPlusPlus\File\AIFF.h" />
     <ClInclude Include="include\AudioPlusPlus\File\File.h" />
-    <ClInclude Include="include\AudioPlusPlus\File\MP3.h" />
-    <ClInclude Include="include\AudioPlusPlus\File\WAV.h" />
     <ClInclude Include="include\AudioPlusPlus\Log\Log.h" />
     <ClInclude Include="include\AudioPlusPlus\Player\Player.h" />
     <ClInclude Include="include\AudioPlusPlus\Player\Stream.h" />

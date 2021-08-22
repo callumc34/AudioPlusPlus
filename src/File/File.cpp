@@ -1,16 +1,16 @@
 #include <AudioPlusPlus/File/File.h>
-#include <AudioPlusPlus/File/AIFF.h>
-#include <AudioPlusPlus/File/WAV.h>
-#include <AudioPlusPlus/File/MP3.h>
 #include <AudioPlusPlus/Log/Log.h>
 #include <filesystem>
 #include <algorithm>
 
 namespace AudioPlusPlus
 {
-	File::File()
+	File::File(const std::string& path) 
+		: SndfileHandle(path)
 	{
-
+		data.path = path;
+		data.sampleRate = samplerate();
+		data.channels = channels();
 	}
 
 	int File::OpenStream(Stream* stream, PaStreamParameters OutputParameters)
@@ -25,7 +25,7 @@ namespace AudioPlusPlus
 			paFramesPerBufferUnspecified,
 			paClipOff,
 			&File::AudioCallback,
-			nullptr
+			this
 		);
 
 		return 0;
@@ -34,6 +34,36 @@ namespace AudioPlusPlus
 	const FileData& File::GetFileData()
 	{
 		return data;
+	}
+
+	int File::FillBuffer(
+		const void* inputBuffer, void* outputBuffer,
+		unsigned long framesPerBuffer,
+		const PaStreamCallbackTimeInfo* timeInfo,
+		PaStreamCallbackFlags statusFlags,
+		void* userData
+	)
+	{
+		//unused suppression
+		(void)inputBuffer;
+		(void)userData;
+		(void)statusFlags;
+
+		float* out = (float*)outputBuffer;
+		int finished = paContinue;
+
+		sf_count_t numRead;
+
+		//Clear output buffer
+		memset(out, 0, sizeof(float) * framesPerBuffer * data.channels);
+
+		numRead = read(out, framesPerBuffer * data.channels);
+
+		if (numRead < framesPerBuffer)
+			finished = paComplete;
+
+		return finished;
+		
 	}
 
 	int File::AudioCallback(
@@ -51,23 +81,6 @@ namespace AudioPlusPlus
 			statusFlags,
 			userData
 		));
-	}
-
-	File* File::Open(const std::string& path)
-	{
-		if (!VerifyFile(path))
-			return nullptr;
-		const std::filesystem::path p = path;
-		std::string ext = p.extension().string();
-		std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
-		if (ext == ".mp3")
-			return new MP3(path);
-		else if (ext == ".wav")
-			return new WAV(path);
-		else if (ext == ".aiff")
-			return new AIFF(path);
-		else
-			return nullptr;
 	}
 
 	int File::VerifyFile(const std::string& path)
