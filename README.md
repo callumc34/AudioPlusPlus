@@ -1,5 +1,9 @@
 # AudioPlusPlus
 
+<p align="center">
+<img src="logo/logo-big.png" width=50%>
+</p>
+
 ## About AudioPlusPlus
 AudioPlusPlus (A++) is an early development audio playback library designed for easy integration with any programs.
 
