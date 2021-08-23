@@ -12,9 +12,13 @@ A++ is currently in very early development stages. Please consider helping by ch
 # How to build
 1. Clone this repository to your machine using `git clone --recursive https://github.com/callumc34/AudioPlusPlus`
     - You may need to run `git submodule init` if you did not clone recusively
-2. Build PortAudio using the instructions here http://files.portaudio.com/docs/v19-doxydocs/tutorial_start.html
-3. Build spdlog using CMake
-4. Open the AudioPlusPlus MSVC solution and build using Visual Studio.
+2. Build the installed submodules
+ - PortAudio using the instructions here http://files.portaudio.com/docs/v19-doxydocs/tutorial_start.html
+ - Spdlog can be built using CMake
+ - libsndfile can be built using CMake
+#### 3. Note libsndfile should be built with all supported packages to ensure A++ can open as many files as possible.
+4. Build spdlog using CMake
+5. Open the AudioPlusPlus MSVC solution and build using Visual Studio.
 
 # Examples
 Check out the examples folder for how to integrate into your app.
