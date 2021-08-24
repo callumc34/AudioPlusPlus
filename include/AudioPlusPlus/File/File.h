@@ -4,8 +4,6 @@
 #define ENABLE_SNDFILE_WINDOWS_PROTOTYPES 1
 #include <sndfile.hh>
 #include <portaudio.h>
-#include <string>
-#include <functional>
 
 namespace AudioPlusPlus
 {
@@ -52,8 +50,6 @@ namespace AudioPlusPlus
 				PaStreamCallbackFlags statusFlags,
 				void* userData
 			);
-
-			static int VerifyFile(const std::string& path);
 
 		private:
 			int OpenStream(Stream* stream, PaStreamParameters OutputParameters);

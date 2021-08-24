@@ -1,9 +1,15 @@
 #MSVS
 .vs
+x64
 out
 *.log
 CMakeSettings.json
 build
+Lib
 
 #Local testing
 testing
+
+#Old files
+examples #Remove once done
+vendor
