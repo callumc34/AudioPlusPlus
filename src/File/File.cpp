@@ -1,7 +1,4 @@
 #include <AudioPlusPlus/File/File.h>
-#include <AudioPlusPlus/Log/Log.h>
-#include <filesystem>
-#include <algorithm>
 
 namespace AudioPlusPlus
 {
@@ -81,12 +78,6 @@ namespace AudioPlusPlus
 			statusFlags,
 			userData
 		));
-	}
-
-	int File::VerifyFile(const std::string& path)
-	{
-		const std::filesystem::path p = path;
-		return std::filesystem::exists(p);
 	}
 
 	File::~File()

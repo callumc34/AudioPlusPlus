@@ -18,9 +18,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(FeatureSummary)
 
-include_directories("include")
-add_subdirectory("src")
-
 if(BUILD_EXAMPLES)
 	#add_subdirectory("examples")
 endif()
@@ -47,5 +44,8 @@ set_package_properties(spdlog PROPERTIES
 )
 
 include(FindLibCheck)
+
+include_directories("include")
+add_subdirectory("src")
 
 feature_summary(WHAT ALL)
