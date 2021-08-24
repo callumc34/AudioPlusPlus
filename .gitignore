@@ -1,13 +1,8 @@
 #MSVS
 .vs
-x64
-Release
-Debug
-OnBeat.vcxproj.user
-*.aps
-
-#local testing
-testing
-
-#log
+out
 *.log
+CMakeSettings.json
+
+#Local testing
+testing
