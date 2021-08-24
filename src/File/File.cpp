@@ -5,7 +5,7 @@
 
 namespace AudioPlusPlus
 {
-	File::File(const std::string& path) 
+	File::File(const std::string& path)
 		: SndfileHandle(path)
 	{
 		data.path = path;
@@ -63,7 +63,7 @@ namespace AudioPlusPlus
 			finished = paComplete;
 
 		return finished;
-		
+
 	}
 
 	int File::AudioCallback(
