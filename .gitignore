@@ -3,6 +3,7 @@
 out
 *.log
 CMakeSettings.json
+build
 
 #Local testing
 testing
