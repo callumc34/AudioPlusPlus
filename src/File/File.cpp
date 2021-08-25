@@ -1,4 +1,7 @@
 #include <AudioPlusPlus/File/File.h>
+#ifdef __linux__
+#include <cstring>
+#endif
 
 namespace AudioPlusPlus
 {
