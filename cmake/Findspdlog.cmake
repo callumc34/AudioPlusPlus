@@ -6,6 +6,7 @@ find_path(SPDLOG_INCLUDE_DIR spdlog/spdlog.h
 		${SPDLOG_INCLUDEDIR}
 		${SPDLOG_INCLUDE_DIRS}
 		${SPDLOG_ROOT}
+		"${SPDLOG_ROOT}/include"
 )
 
 find_library(SPDLOG_LIBRARY
@@ -18,6 +19,7 @@ find_library(SPDLOG_LIBRARY
 		${SPDLOG_LIBDIR}
 		${SPDLOG_LIB_DIRS}
 		${SPDLOG_ROOT}
+		"${SPDLOG_ROOT}/lib"
 )
 
 include(FindPackageHandleStandardArgs)

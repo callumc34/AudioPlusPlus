@@ -53,6 +53,48 @@ set_package_properties(sndfile PROPERTIES
 	PURPOSE "Audio decoding"
 )
 
+set_package_properties(Ogg PROPERTIES
+	TYPE RECOMMENDED
+	URL "www.xiph.org/ogg/"
+	DESCRIPTION "library for manipulating ogg bitstreams"
+	PURPOSE "Required to enable Vorbis, Speex, and Opus support"
+)
+
+set_package_properties(Vorbis PROPERTIES
+	TYPE RECOMMENDED
+	URL "www.vorbis.com/"
+	DESCRIPTION "open source lossy audio codec"
+	PURPOSE "Enables Vorbis support"
+)
+
+set_package_properties(FLAC PROPERTIES
+	TYPE RECOMMENDED
+	URL "www.xiph.org/flac/"
+	DESCRIPTION "Free Lossless Audio Codec Library"
+	PURPOSE "Enables FLAC support"
+)
+
+set_package_properties(Opus PROPERTIES
+	TYPE RECOMMENDED
+	URL	"www.opus-codec.org/"
+	DESCRIPTION "Standardized open source low-latency fullband codec"
+	PURPOSE	"Enables experimental Opus support"
+)
+
+set_package_properties(Mpg123 PROPERTIES
+	TYPE RECOMMENDED
+	URL "https://www.mpg123.de/"
+	DESCRIPTION "MPEG Audio Decoder"
+	PURPOSE "MPEG Support for sndfile"
+)
+
+set_package_properties(Lame PROPERTIES
+	TYPE RECOMMENDED
+	URL "https://lame.sourceforge.io/index.php"
+	DESCRIPTION "MPEG Audio Encoder"
+	PURPOSE "MPEG Support for sndfile"
+)
+
 set_package_properties(portaudio PROPERTIES
 	TYPE REQUIRED
 	URL "https://github.com/portaudio/portaudio"

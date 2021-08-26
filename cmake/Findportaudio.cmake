@@ -6,6 +6,7 @@ find_path(PORTAUDIO_INCLUDE_DIR portaudio.h
 		${PORTAUDIO_INCLUDEDIR}
 		${PORTAUDIO_INCLUDE_DIRS}
 		${PORTAUDIO_ROOT}
+		"${PORTAUDIO_ROOT}/include"
 )
 
 find_library(PORTAUDIO_LIBRARY
@@ -18,6 +19,7 @@ find_library(PORTAUDIO_LIBRARY
 		${PORTAUDIO_LIBDIR}
 		${PORTAUDIO_LIB_DIRS}
 		${PORTAUDIO_ROOT}
+		"${PORTAUDIO_ROOT}/lib"
 )
 
 include(FindPackageHandleStandardArgs)
