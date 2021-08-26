@@ -9,6 +9,14 @@ if(BUILD_EXAMPLES)
 			${PORTAUDIO_LIBRARY}
 		PRIVATE
 			${SNDFILE_LIBRARY}
+			${OGG_LIBRARY}
+			${FLAC_LIBRARY}
+			${OPUS_LIBRARY}
+			${Vorbis_Vorbis_LIBRARY}
+			${Vorbis_Enc_LIBRARY}
+			${Vorbis_File_LIBRARY}
+			${LAME_LIBRARIES}
+			${MPG123_LIBRARIES}
 			${SPDLOG_LIBRARY}
 			$<$<BOOL:${WIN32}>:shlwapi>
 	)

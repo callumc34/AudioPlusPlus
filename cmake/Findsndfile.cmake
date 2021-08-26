@@ -6,6 +6,7 @@ find_path(SNDFILE_INCLUDE_DIR sndfile.h
 		${SNDFILE_INCLUDEDIR}
 		${SNDFILE_INCLUDE_DIRS}
 		${SNDFILE_ROOT}
+		"${SNDFILE_ROOT}/include"
 )
 
 find_library(SNDFILE_LIBRARY
@@ -18,6 +19,7 @@ find_library(SNDFILE_LIBRARY
 		${SNDFILE_LIBDIR}
 		${SNDFILE_LIB_DIRS}
 		${SNDFILE_ROOT}
+		"${SNDFILE_ROOT}/lib"
 )
 
 include(FindPackageHandleStandardArgs)
