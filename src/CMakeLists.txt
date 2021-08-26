@@ -23,10 +23,11 @@ set(audioplusplus_HDRS
 add_library(AudioPlusPlus::audioplusplus ALIAS ${PROJECT_NAME})
 
 target_link_libraries(${PROJECT_NAME}
+	PUBLIC
+		${PORTAUDIO_LIBRARY}
 	PRIVATE
-		portaudio
-		sndfile
-		spdlog
+		${SNDFILE_LIBRARY}
+		${SPDLOG_LIBRARY}
 )
 
 target_include_directories(${PROJECT_NAME}

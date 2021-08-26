@@ -6,10 +6,11 @@ if(BUILD_EXAMPLES)
 	target_link_libraries(${PROJECT_NAME}-example1
 		PUBLIC
 			${PROJECT_NAME}
-			portaudio
+			${PORTAUDIO_LIBRARY}
 		PRIVATE
-			sndfile
-			spdlog
+			${SNDFILE_LIBRARY}
+			${SPDLOG_LIBRARY}
+			$<$<BOOL:${WIN32}>:shlwapi>
 	)
 
 	target_include_directories(${PROJECT_NAME}-example1
@@ -18,5 +19,4 @@ if(BUILD_EXAMPLES)
 			${PORTAUDIO_INCLUDE_DIR}
 			${SPDLOG_INCLUDE_DIR}
 	)
-
 endif()
