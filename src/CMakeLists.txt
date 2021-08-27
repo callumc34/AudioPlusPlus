@@ -10,14 +10,14 @@ add_library(${PROJECT_NAME}
 )
 
 set(audioplusplus_HDRS
-	include/AudioPlusPlus.h
-	include/Config/Config.h
-	include/Device/Device.h
-	include/Device/DeviceManager.h
-	include/File/File.h
-	include/Log/Log.h
-	include/Player/Player.h
-	include/Player/Stream.h
+	include/AudioPlusPlus/AudioPlusPlus.h
+	include/AudioPlusPlus/Config/Config.h
+	include/AudioPlusPlus/Device/Device.h
+	include/AudioPlusPlus/Device/DeviceManager.h
+	include/AudioPlusPlus/File/File.h
+	include/AudioPlusPlus/Log/Log.h
+	include/AudioPlusPlus/Player/Player.h
+	include/AudioPlusPlus/Player/Stream.h
 )
 
 add_library(AudioPlusPlus::audioplusplus ALIAS ${PROJECT_NAME})
