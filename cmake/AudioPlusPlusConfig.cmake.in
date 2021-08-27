@@ -5,6 +5,8 @@ set(AudioPlusPlus_VERSION_PATCH @PROJECT_VERSION_PATCH@)
 
 set(AudioPlusPlus_WITH_SPDLOG @BUILD_WITH_LOGGING@)
 
+include(CMakeFindDependencyMacro)
+
 if(AudioPlusPlus_WITH_SPDLOG)
 	find_dependency(spdlog)
 endif()

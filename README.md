@@ -61,8 +61,6 @@ If you built your own dependencies and installed them using `cmake --install` th
 - `Vorbis_ROOT` - Install location of vorbis package
 
 ##### Other options
-- `BUILD_SHARED_LIBS` - build shared library (DLL under Windows) when `ON`,
-  build static library othervise. This option is `OFF` by default.
 - `BUILD_EXAMPLES` - Builds the example programs
 - `ENABLE_PACKAGE_CONFIG` - Generate and install [package config file](https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#config-file-packages).
 - `INSTALL_PKGCONFIG_MODULE` - Generate and install [pkg-config module](https://people.freedesktop.org/~dbn/pkg-config-guide.html).

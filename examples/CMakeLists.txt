@@ -17,8 +17,8 @@ if(BUILD_EXAMPLES)
 			${Vorbis_File_LIBRARY}
 			${LAME_LIBRARIES}
 			${MPG123_LIBRARIES}
-			${SPDLOG_LIBRARY}
-			$<$<BOOL:${WIN32}>:shlwapi>
+			$<$<BOOL:BUILD_WITH_LOGGING>:${SPDLOG_LIBRARY}>
+			$<$<BOOL:WIN32>:shlwapi>
 	)
 
 	target_include_directories(${PROJECT_NAME}-example1
