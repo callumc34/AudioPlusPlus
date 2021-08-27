@@ -40,7 +40,10 @@ make install
 - On Windows this will by default be a visual studio solution if the proper tools are installed.
 
 The unified command can then be run to build the files
-`cmake --build`
+```
+cmake --build
+cmake --install
+````
 
 ## CMake Options - NOTE: Not all functionality is added yet
 You can pass additional options with `-D<parameter>=<value>` when you run

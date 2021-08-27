@@ -6,6 +6,11 @@ using namespace AudioPlusPlus;
 
 int main(int argc, char** argv)
 {
+	if (argc < 2)
+	{
+		AUDIO_ERROR("Please specify a file to play audio from");
+		return -1;
+	}
 	Init();
 	AUDIO_INFO("Hello from AudioPlusPlus");
 	File* x = new File(argv[1]);
