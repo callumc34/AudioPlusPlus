@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.8)
 
 project(
-	"audio++"
+	"AudioPlusPlus"
 	VERSION 0.0.1
 	LANGUAGES CXX
 	DESCRIPTION "Open source audio playback"
@@ -37,11 +37,13 @@ endif ()
 option(BUILD_EXAMPLES "Build examples" ON)
 option(ENABLE_PACKAGE_CONFIG "Generate and install package config file" ON)
 option(INSTALL_PKGCONFIG_MODULE "Generate and isntall pkg-config module" ON)
+option(BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging" ON)
 
 add_feature_info(ENABLE_STATIC_RUNTIME ENABLE_STATIC_RUNTIME "Enable static runtime")
 add_feature_info(BUILD_EXAMPLES BUILD_EXAMPLES "Build examples")
 add_feature_info(ENABLE_PACKAGE_CONFIG ENABLE_PACKAGE_CONFIG "Generate and install package config files")
-add_feature_info (INSTALL_PKGCONFIG_MODULE INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module")
+add_feature_info(INSTALL_PKGCONFIG_MODULE INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module")
+add_feature_info(BUILD_WITH_LOGGING BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging")
 
 #Dependencies
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -126,7 +128,7 @@ if(INSTALL_PKGCONFIG_MODULE)
 	set(PUBLIC_LIBS "-lportaudio")
 	set(PRIVATE_LIBS "-lsndfile -lspdlog")
 	
-	configure_file(audio++.pc.in audio++.pc @ONLY)
+	configure_file(AudioPlusPlus.pc.in AudioPlusPlus.pc @ONLY)
 endif()
 
 if(BUILD_EXAMPLES)
@@ -138,7 +140,7 @@ if(ENABLE_PACKAGE_CONFIG)
 	if(WIN32 AND (NOT MINGW) AND (NOT CYGWIN))
 		set(CMAKE_INSTALL_PACKAGEDIR cmake) 
 	 else()
-	 	set(CMAKE_INSTALL_PACKAGEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Audio++)
+	 	set(CMAKE_INSTALL_PACKAGEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/AudioPlusPlus)
 	 endif()
 
 	 install(TARGETS ${AUDIOPLUSPLUS_PROGRAM_TARGETS}
@@ -150,7 +152,12 @@ if(ENABLE_PACKAGE_CONFIG)
 		RUNTIME DESTINATION			${CMAKE_INSTALL_BINDIR}
 		ARCHIVE DESTINATION			${CMAKE_INSTALL_LIBDIR}
 		LIBRARY DESTINATION			${CMAKE_INSTALL_LIBDIR}
-		PUBLIC_HEADER DESTINATION	${CMAKE_INSTALL_INCLUDEDIR}
+	)
+	#Install include files keeping hierachy
+	install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
+		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+		FILES_MATCHING
+		PATTERN "*.h"
 	)
 
 	include(CMakePackageConfigHelpers)
@@ -171,14 +178,13 @@ if(ENABLE_PACKAGE_CONFIG)
 	install(EXPORT AudioPlusPlusTargets
 		NAMESPACE AudioPlusPlus::
 		DESTINATION ${CMAKE_INSTALL_PACKAGEDIR}
-		)
+	)
 	install(
 		FILES
 			${CMAKE_CURRENT_BINARY_DIR}/AudioPlusPlusConfig.cmake
 			${CMAKE_CURRENT_BINARY_DIR}/AudioPlusPlusConfigVersion.cmake
 		DESTINATION	${CMAKE_INSTALL_PACKAGEDIR}
-		)
-
+	)
 else()
 	install(TARGETS ${PROJECT_NAME} ${audioplusplus_PROGRAMS}
 		RUNTIME DESTINATION			${CMAKE_INSTALL_BINDIR}

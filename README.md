@@ -66,6 +66,7 @@ If you built your own dependencies and installed them using `cmake --install` th
 - `BUILD_EXAMPLES` - Builds the example programs
 - `ENABLE_PACKAGE_CONFIG` - Generate and install [package config file](https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#config-file-packages).
 - `INSTALL_PKGCONFIG_MODULE` - Generate and install [pkg-config module](https://people.freedesktop.org/~dbn/pkg-config-guide.html).
+- `BUILD_WITH_LOGGING` - Build with logging support (requires SpdLog)
 - `CMAKE_INSTALL_PREFIX` - build install location, the same as `--prefix` option
   of `configure` script
   
