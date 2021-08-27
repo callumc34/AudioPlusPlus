@@ -50,8 +50,12 @@ find_package_handle_standard_args (Lame
 	)
 
 if (LAME_FOUND)
-	set(LAME_LIBRARIES ${LAME_LIBRARY} $<$<BOOL:LAME_HIP_LIBRARY>:${LAME_HIP_LIBRARY}>)
-	set (LAME_INCLUDE_DIRS ${LAME_INCLUDE_DIR})
+	if(LAME_HIP_LIBRARY)
+		set(LAME_LIBRARIES ${LAME_LIBRARY} ${LAME_HIP_LIBRARY})
+	else()
+		set(LAME_LIBRARIES ${LAME_LIBRARY})
+	endif()
+	set(LAME_INCLUDE_DIRS ${LAME_INCLUDE_DIR})
 
 	if (NOT TARGET Lame::Lame)
 		add_library (Lame::Lame UNKNOWN IMPORTED)
