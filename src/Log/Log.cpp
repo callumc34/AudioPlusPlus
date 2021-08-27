@@ -1,3 +1,4 @@
+#ifdef ENABLE_LOGGING
 #include <AudioPlusPlus/Log/Log.h>
 
 #include <spdlog/sinks/stdout_color_sinks.h>
@@ -30,3 +31,12 @@ namespace AudioPlusPlus
 		ClientLogger->flush_on(spdlog::level::trace);
 	}
 }
+#else
+namespace AudioPlusPlus
+{
+	namespace Log
+	{
+		void Init() { return; }
+	}
+}
+#endif

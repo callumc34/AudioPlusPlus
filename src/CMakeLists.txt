@@ -9,6 +9,10 @@ add_library(${PROJECT_NAME}
 	Player/Stream.cpp
 )
 
+if(BUILD_WITH_LOGGING)
+	add_compile_definitions(ENABLE_LOGGING=True)
+endif()
+
 set(audioplusplus_HDRS
 	include/AudioPlusPlus/AudioPlusPlus.h
 	include/AudioPlusPlus/Config/Config.h
@@ -27,16 +31,12 @@ target_link_libraries(${PROJECT_NAME}
 		${PORTAUDIO_LIBRARY}
 	PRIVATE
 		${SNDFILE_LIBRARY}
-		${SPDLOG_LIBRARY}
+		$<$<BOOL:BUILD_WITH_LOGGING>:${SPDLOG_LIBRARY}>
 )
 
 target_include_directories(${PROJECT_NAME}
 	PUBLIC
 		${SNDFILE_INCLUDE_DIR}
 		${PORTAUDIO_INCLUDE_DIR}
-		${SPDLOG_INCLUDE_DIR}
-)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-	PUBLIC_HEADER "${audioplusplus_HDRS}"
+		$<$<BOOL:BUILD_WITH_LOGGING>:${SPDLOG_INCLUDE_DIR}>
 )

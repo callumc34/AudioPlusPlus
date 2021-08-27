@@ -1,4 +1,5 @@
 #pragma once
+#ifdef ENABLE_LOGGING
 #include <memory>
 
 // This ignores all warnings raised inside External headers
@@ -22,8 +23,6 @@ namespace AudioPlusPlus {
 
 	};
 }
-
-#ifndef NO_LOG
 //Core log macros for the library
 #define AUDIO_CORE_TRACE(...) ::AudioPlusPlus::Log::GetCoreLogger()->trace(__VA_ARGS__)
 #define AUDIO_CORE_INFO(...) ::AudioPlusPlus::Log::GetCoreLogger()->info(__VA_ARGS__)
@@ -53,4 +52,13 @@ namespace AudioPlusPlus {
 #define AUDIO_WARN(...) 
 #define AUDIO_ERROR(...) 
 #define AUDIO_CRITICAL(...) 
+
+namespace AudioPlusPlus
+{
+	namespace Log
+	{
+		void Init();
+	}
+}
+
 #endif

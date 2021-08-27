@@ -105,7 +105,7 @@ set_package_properties(portaudio PROPERTIES
 )
 
 set_package_properties(spdlog PROPERTIES
-	TYPE REQUIRED
+	TYPE RECOMMENDED
 	URL "https://github.com/gabime/spdlog"
 	DESCRIPTION "Fast C++ logging library"
 	PURPOSE "Logging"
@@ -119,6 +119,11 @@ add_subdirectory("src")
 feature_summary(WHAT ALL)
 
 #Config files
+if(BUILD_WITH_LOGGING)
+	set(AudioPlusPlus_WITH_LOGGING ${BUILD_WITH_LOGGING})
+	add_compile_definitions(ENABLE_LOGGING=True)
+endif()
+
 if(INSTALL_PKGCONFIG_MODULE)
 	set(prefix ${CMAKE_INSTALL_PREFIX})
 	set(exec_prefix "\$\{prefix\}")
@@ -126,7 +131,11 @@ if(INSTALL_PKGCONFIG_MODULE)
 	set(includedir "\$\{prefix\}/${CMAKE_INSTALL_INCLUDEDIR}")
 	set(VERSION ${PROJECT_VERSION})
 	set(PUBLIC_LIBS "-lportaudio")
-	set(PRIVATE_LIBS "-lsndfile -lspdlog")
+	if(BUILD_WITH_LOGGING)
+		set(PRIVATE_LIBS "-lsndfile -lspdlog")
+	else()
+		set(PRIVATE_LIBS "-lsndfile")
+	endif()
 	
 	configure_file(AudioPlusPlus.pc.in AudioPlusPlus.pc @ONLY)
 endif()
