@@ -6,7 +6,7 @@
 namespace AudioPlusPlus
 {
 	File::File(const std::string& path)
-		: SndfileHandle(path)
+		: SndfileHandle(path), tag(path)
 	{
 		data.path = path;
 		data.sampleRate = samplerate();

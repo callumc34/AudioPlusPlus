@@ -7,17 +7,18 @@ set(AudioPlusPlus_WITH_SPDLOG @BUILD_WITH_LOGGING@)
 
 include(CMakeFindDependencyMacro)
 
+find_depdendency(taglib)
 if(AudioPlusPlus_WITH_SPDLOG)
 	find_dependency(spdlog)
 endif()
 find_dependency(portaudio 19.8.0)
-find_dependency(sndfile 1.1.0)
 find_dependency(Ogg 1.3)
 find_dependency(FLAC COMPONENTS Enc)
 find_dependency(Opus)
 find_dependency(Vorbis)
 find_dependency(Lame)
 find_dependency(Mpg123 1.25.10)
+find_dependency(sndfile 1.1.0)
 
 include(${CMAKE_CURRENT_LIST_DIR}/AudioPlusPlusTargets.cmake)
 

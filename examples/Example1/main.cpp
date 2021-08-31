@@ -15,7 +15,10 @@ int main(int argc, char** argv)
 	AUDIO_INFO("Hello from AudioPlusPlus");
 	File* x = new File(argv[1]);
 	AUDIO_INFO("File path: " + x->GetFileData().path);
-	AUDIO_INFO("File type: " + std::to_string((int)x->GetFileData().format));
+	AUDIO_INFO("File Bitrate: " + std::to_string(x->tag.GetAudioProperties().bitrate()));
+	AUDIO_INFO("File Sample Rate: " + std::to_string(x->tag.GetAudioProperties().sampleRate()));
+	AUDIO_INFO("File Channels: " + std::to_string(x->tag.GetAudioProperties().channels()));
+	AUDIO_INFO("File Length: " + std::to_string(x->tag.GetAudioProperties().lengthInSeconds ()));
 
 	//Make a stream
 	Stream stream;

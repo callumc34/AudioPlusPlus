@@ -1,5 +1,6 @@
 ﻿# CMakeList.txt : CMake project for AudioPlusPlus
 cmake_minimum_required(VERSION 3.8)
+cmake_policy(SET CMP0074 NEW)
 
 project(
 	"AudioPlusPlus"
@@ -57,28 +58,28 @@ set_package_properties(sndfile PROPERTIES
 
 set_package_properties(Ogg PROPERTIES
 	TYPE RECOMMENDED
-	URL "www.xiph.org/ogg/"
+	URL "https://www.xiph.org/ogg/"
 	DESCRIPTION "library for manipulating ogg bitstreams"
 	PURPOSE "Required to enable Vorbis, Speex, and Opus support"
 )
 
 set_package_properties(Vorbis PROPERTIES
 	TYPE RECOMMENDED
-	URL "www.vorbis.com/"
+	URL "https://www.vorbis.com/"
 	DESCRIPTION "open source lossy audio codec"
 	PURPOSE "Enables Vorbis support"
 )
 
 set_package_properties(FLAC PROPERTIES
 	TYPE RECOMMENDED
-	URL "www.xiph.org/flac/"
+	URL "https://www.xiph.org/flac/"
 	DESCRIPTION "Free Lossless Audio Codec Library"
 	PURPOSE "Enables FLAC support"
 )
 
 set_package_properties(Opus PROPERTIES
 	TYPE RECOMMENDED
-	URL	"www.opus-codec.org/"
+	URL	"https://www.opus-codec.org/"
 	DESCRIPTION "Standardized open source low-latency fullband codec"
 	PURPOSE	"Enables experimental Opus support"
 )
@@ -111,6 +112,13 @@ set_package_properties(spdlog PROPERTIES
 	PURPOSE "Logging"
 )
 
+set_package_properties(taglib PROPERTIES
+	TYPE REQUIRED
+	URL "https://taglib.org/"
+	DESCRIPTION "Audio meta-data library"
+	PURPOSE "ID3 Tag reading"
+)
+
 include(FindLibCheck)
 
 include_directories("include")
@@ -130,7 +138,7 @@ if(INSTALL_PKGCONFIG_MODULE)
 	set(libdir "\$\{prefix\}/${CMAKE_INSTALL_LIBDIR}")
 	set(includedir "\$\{prefix\}/${CMAKE_INSTALL_INCLUDEDIR}")
 	set(VERSION ${PROJECT_VERSION})
-	set(PUBLIC_LIBS "-lportaudio")
+	set(PUBLIC_LIBS "-lportaudio -ltaglib")
 	if(BUILD_WITH_LOGGING)
 		set(PRIVATE_LIBS "-lsndfile -lspdlog")
 	else()

@@ -1,4 +1,5 @@
 #pragma once
+#include <AudioPlusPlus/File/Tag.h>
 #include <AudioPlusPlus/Player/Stream.h>
 #ifdef _WIN32
 #include <windows.h>
@@ -34,6 +35,8 @@ namespace AudioPlusPlus
 		public:
 			File(const std::string& path);
 			~File();
+
+			const Tag tag;
 
 			const FileData& GetFileData();
 
