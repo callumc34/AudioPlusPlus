@@ -14,11 +14,11 @@ A++ is currently in very early development stages. Please consider helping by ch
 2. Install the dependencies for this project:
 - [Microsoft's VCPKG](https://github.com/microsoft/vcpkg) Can be used to install the dependencies on windows using
 ```bash
-    vcpkg install libogg:x64-windows-static libvorbis:x64-windows-static libflac:x64-windows-static opus:x64-windows-static libogg:x86-windows-static libvorbis:x64-windows-static  libflac:x64-windows-static opus:x64-windows-static mp3lame:x64-windows-static mpg123:x64-windows-static spdlog:x64-windows-static portaudio:x64-windows-static 
+    vcpkg install libogg:x64-windows-static libvorbis:x64-windows-static libflac:x64-windows-static opus:x64-windows-static libogg:x86-windows-static libvorbis:x64-windows-static  libflac:x64-windows-static opus:x64-windows-static mp3lame:x64-windows-static mpg123:x64-windows-static spdlog:x64-windows-static portaudio:x64-windows-static taglib:x64-windows-static
 ```
 Similarily for linux the majority of these packages can be installed using the package manager
 ```bash
-sudo apt install libasound2-dev libflac-dev libogg-dev libtool libvorbis-dev libopus-dev libmp3lame-dev libmpg123-dev
+sudo apt install libasound2-dev libflac-dev libogg-dev libtool libvorbis-dev libopus-dev libmp3lame-dev libmpg123-dev libtag1-dev
 ```
 However for both vcpkg and linux some of these packages are outdated - sndfile and portaudio - and do not have the best features installed.
 
@@ -49,7 +49,10 @@ cmake --install
 You can pass additional options with `-D<parameter>=<value>` when you run
 `cmake` command. Some useful system options:
 ##### Finding dependency options
-If you built your own dependencies and installed them using `cmake --install` the best way to let CMake find the packages is with the following variables
+If you built your own dependencies and installed them using `cmake --install` on windows the best way to let CMake find the packages is with the following variables
+- `DEPENDENCIES_ROOT` - Install location of the following packages. On linux if the packages were installed to the default prefix CMake should be able to find them without the need for any variables.
+
+Or specify where to find each package individually
 - `FLAC_ROOT` - Install location of FLAC Package
 - `LAME_ROOT` - Install location of LAME files with structure `/include` and `/lib`
 - `MPG123_ROOT` - Install location of MPG123 Package
@@ -59,6 +62,7 @@ If you built your own dependencies and installed them using `cmake --install` th
 - `SNDFILE_ROOT` - Install location of libsndfile package
 - `SPDLOG_ROOT` - Install location of spdlog package
 - `Vorbis_ROOT` - Install location of vorbis package
+- `TAGLIB_ROOT` - Install location of Taglib package
 
 ##### Other options
 - `BUILD_EXAMPLES` - Builds the example programs
