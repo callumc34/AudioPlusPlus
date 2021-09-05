@@ -4,10 +4,11 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: @PACKAGE_NAME@
-Description: Open source audio playback
+Description: Open source library for interacting with audio files
 URL: @PROJECT_HOMEPAGE_URL@
-Requires: @REQUIRES@
+Requires: @REQUIRES_PUBLIC@
+Requires.private: @REQUIRES_PRIVATE@
 Version: @VERSION@
-Libs: -L${libdir} --lAudioPlusPlus @PUBLIC_LIBS@
+Libs: -L${libdir} -lAudioPlusPlus @PUBLIC_LIBS@
 Libs.private: -L${libdir} @PRIVATE_LIBS@
 Cflags: -I${includedir}

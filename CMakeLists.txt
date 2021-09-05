@@ -4,9 +4,9 @@ cmake_policy(SET CMP0074 NEW)
 
 project(
 	"AudioPlusPlus"
-	VERSION 0.0.1
+	VERSION 0.1.0
 	LANGUAGES CXX
-	DESCRIPTION "Open source audio playback"
+	DESCRIPTION "Open source library for interacting with audio files"
 	HOMEPAGE_URL https://github.com/callumc34/audioplusplus
 )
 
@@ -138,11 +138,13 @@ if(INSTALL_PKGCONFIG_MODULE)
 	set(libdir "\$\{prefix\}/${CMAKE_INSTALL_LIBDIR}")
 	set(includedir "\$\{prefix\}/${CMAKE_INSTALL_INCLUDEDIR}")
 	set(VERSION ${PROJECT_VERSION})
-	set(PUBLIC_LIBS "-lportaudio -ltaglib")
+	set(REQUIRES_PUBLIC "")
+	set(REQUIRES_PRIVATE "taglib portaudio sndfile flac ogg vorbis vorbisenc opus libmpg123")
+	set(PUBLIC_LIBS "")
+	set(PRIVATE_LIB "-lsndfile -lportaudio -ltaglib")
 	if(BUILD_WITH_LOGGING)
-		set(PRIVATE_LIBS "-lsndfile -lspdlog")
-	else()
-		set(PRIVATE_LIBS "-lsndfile")
+		set(REQUIRES_PRIVATE "${REQUIRES_PRIVATE} spdlog")
+		set(PRIVATE_LIBS "${PRIVATE_LIB} -lspdlog")
 	endif()
 	
 	configure_file(AudioPlusPlus.pc.in AudioPlusPlus.pc @ONLY)
@@ -170,6 +172,7 @@ if(ENABLE_PACKAGE_CONFIG)
 		ARCHIVE DESTINATION			${CMAKE_INSTALL_LIBDIR}
 		LIBRARY DESTINATION			${CMAKE_INSTALL_LIBDIR}
 	)
+
 	#Install include files keeping hierachy
 	install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
 		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
@@ -207,7 +210,14 @@ else()
 		RUNTIME DESTINATION			${CMAKE_INSTALL_BINDIR}
 		ARCHIVE DESTINATION			${CMAKE_INSTALL_LIBDIR}
 		LIBRARY DESTINATION			${CMAKE_INSTALL_LIBDIR}
-		PUBLIC_HEADER DESTINATION	${CMAKE_INSTALL_INCLUDEDIR})
+	)
+
+	#Install include files keeping hierachy
+	install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
+		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+		FILES_MATCHING
+		PATTERN "*.h"
+	)
 endif()
 
 if(INSTALL_PKGCONFIG_MODULE)
