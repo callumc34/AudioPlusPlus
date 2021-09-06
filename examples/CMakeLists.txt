@@ -29,4 +29,35 @@ if(BUILD_EXAMPLES)
 			${TAGLIB_INCLUDE_DIR}
 			${SPDLOG_INCLUDE_DIR}
 	)
+
+	add_executable(${PROJECT_NAME}-example2
+		Example2/main.cpp
+	)
+
+	target_link_libraries(${PROJECT_NAME}-example2
+		PUBLIC
+			${PROJECT_NAME}
+			${PORTAUDIO_LIBRARY}
+			${TAGLIB_LIBRARY}
+		PRIVATE
+			${SNDFILE_LIBRARY}
+			${OGG_LIBRARY}
+			${FLAC_LIBRARY}
+			${OPUS_LIBRARY}
+			${Vorbis_Vorbis_LIBRARY}
+			${Vorbis_Enc_LIBRARY}
+			${Vorbis_File_LIBRARY}
+			${LAME_LIBRARIES}
+			${MPG123_LIBRARIES}
+			$<$<BOOL:${BUILD_WITH_LOGGING}>:${SPDLOG_LIBRARY}>
+			$<$<BOOL:${WIN32}>:shlwapi>
+	)
+
+	target_include_directories(${PROJECT_NAME}-example2
+		PUBLIC
+			${SNDFILE_INCLUDE_DIR}
+			${PORTAUDIO_INCLUDE_DIR}
+			${TAGLIB_INCLUDE_DIR}
+			${SPDLOG_INCLUDE_DIR}
+	)
 endif()

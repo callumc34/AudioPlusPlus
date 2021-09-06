@@ -5,86 +5,28 @@
 
 namespace AudioPlusPlus
 {
-	File::File(const std::string& path)
-		: SndfileHandle(path), tag(path)
+	IFile::IFile(const std::string& path, int mode, int format,
+		int channels, int samplerate)
+		: SndfileHandle(path, mode, format, channels, samplerate)
 	{
-		data.path = path;
-		data.sampleRate = samplerate();
-		data.channels = channels();
+		tag = new TagHandle(path);
+		data = new FileData();
+		data->path = path;
 	}
 
-	int File::OpenStream(Stream* stream, PaStreamParameters OutputParameters)
+	const TagHandle* IFile::GetTagHandle()
 	{
-		//TODO(Callum): Fix config parameters
-		//Also just fix in general
-		PaError err = Pa_OpenStream(
-			stream->Get(),
-			nullptr,
-			&OutputParameters,
-			44100,
-			paFramesPerBufferUnspecified,
-			paClipOff,
-			&File::AudioCallback,
-			this
-		);
-
-		return 0;
+		return tag;
 	}
 
-	const FileData& File::GetFileData()
+	const FileData* IFile::GetFileData()
 	{
 		return data;
 	}
 
-	int File::FillBuffer(
-		const void* inputBuffer, void* outputBuffer,
-		unsigned long framesPerBuffer,
-		const PaStreamCallbackTimeInfo* timeInfo,
-		PaStreamCallbackFlags statusFlags,
-		void* userData
-	)
+	IFile::~IFile()
 	{
-		//unused suppression
-		(void)inputBuffer;
-		(void)userData;
-		(void)statusFlags;
-
-		float* out = (float*)outputBuffer;
-		int finished = paContinue;
-
-		sf_count_t numRead;
-
-		//Clear output buffer
-		memset(out, 0, sizeof(float) * framesPerBuffer * data.channels);
-
-		numRead = read(out, framesPerBuffer * data.channels);
-
-		if (numRead < framesPerBuffer)
-			finished = paComplete;
-
-		return finished;
-
-	}
-
-	int File::AudioCallback(
-		const void* inputBuffer, void* outputBuffer,
-		unsigned long framesPerBuffer,
-		const PaStreamCallbackTimeInfo* timeInfo,
-		PaStreamCallbackFlags statusFlags,
-		void* userData
-	)
-	{
-		return (static_cast<File*>(userData)->FillBuffer(
-			inputBuffer, outputBuffer,
-			framesPerBuffer,
-			timeInfo,
-			statusFlags,
-			userData
-		));
-	}
-
-	File::~File()
-	{
-
+		delete tag;
+		delete data;
 	}
 }

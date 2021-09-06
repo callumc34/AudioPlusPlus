@@ -9,19 +9,22 @@ namespace AudioPlusPlus
 		public:
 			static DeviceManager& Get();
 
-			DeviceManager();
-			~DeviceManager();
+			const Device& GetDefaultOutputDevice() const;
+			const Device& GetDefaultInputDevice() const;
 
-			const std::vector<Device>& GetDevices();
-			PaDeviceIndex GetActiveDevice();
-			int GetCount();
+			const std::vector<Device>& GetDevices() const;
+			int GetSize() const;
 
-			int SetActiveDevice(int index);
+			const Device& at(int index) const;
 
 		private:
 			static DeviceManager* instance;
 
-			int count;
+			DeviceManager();
+			~DeviceManager();
+
 			std::vector<Device> devices;
+
+			friend class Stream;
 	};
 }

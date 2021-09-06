@@ -17,20 +17,19 @@ namespace AudioPlusPlus
 
 	}
 
-	int Player::Play(File* file, Stream* stream, Device* device)
+	int Player::Play(ReadFile& file, Stream& stream, const Device& device)
 	{
-		if (device == nullptr)
-			device = new Device(Pa_GetDefaultOutputDevice());
+		if (stream.GetDevice() == nullptr)
+		{
+			stream.SetDevice(device);
+		}
 
-		PaStreamParameters OutputParameters{
-			device->GetIndex(),
-			file->GetFileData().channels,
-			paFloat32,
-			device->GetInfo()->defaultLowOutputLatency,
-			NULL
-		};
+		return stream.OpenPlaybackStream(file);
+	}
 
-		return file->OpenStream(stream, OutputParameters);
+	int Player::Close(Stream& stream)
+	{
+		return stream.Close();
 	}
 
 	Player::~Player()

@@ -3,8 +3,6 @@
 
 namespace AudioPlusPlus
 {
-	//Forward declare for friend
-	class DeviceManager;
 
 	class Device
 	{
@@ -12,14 +10,16 @@ namespace AudioPlusPlus
 			Device(int index);
 			~Device();
 
-			const PaDeviceInfo* GetInfo();
-			int GetIndex();
-			bool IsActive();
+			const PaDeviceInfo* GetInfo() const;
+			int GetIndex() const;
+			bool IsActive() const;
+			//Assuming one device can have both input and output channels
+			bool IsInput() const;
+			bool IsOutput() const;
 
 		private:
 			int index;
-			bool active = false;
-
-			friend DeviceManager;
+			bool input;
+			bool output;
 	};
 }

@@ -1,5 +1,5 @@
 #include <AudioPlusPlus/Device/DeviceManager.h>
-#include <AudioPlusPlus/AudioPlusPlus.h>
+#include <AudioPlusPlus/Log/Log.h>
 
 namespace AudioPlusPlus
 {
@@ -15,57 +15,42 @@ namespace AudioPlusPlus
 	
 	DeviceManager::DeviceManager()
 	{
-		count = Pa_GetDeviceCount();
+		int count = Pa_GetDeviceCount();
 		if (count < 0)
 		{
-			AUDIO_CORE_ERROR("Device count returned error: " + std::string(Pa_GetErrorText(count)));
-			Exit();
+			AUDIO_CORE_ERROR("No devices found - error: " + std::string(Pa_GetErrorText(count)));
 			return;
 		}
-
-		devices.reserve(count);
-		for (int i = 0; i < count; i++)
+		devices.reserve(Pa_GetDeviceCount());
+		for (int i = 0; i < Pa_GetDeviceCount(); i++)
 		{
 			devices.emplace_back(i);
 		}
 	}
 
-	const std::vector<Device>& DeviceManager::GetDevices()
+	const Device& DeviceManager::GetDefaultOutputDevice() const
+	{
+		return devices[Pa_GetDefaultOutputDevice()];
+	}
+
+	const Device& DeviceManager::GetDefaultInputDevice() const
+	{
+		return devices[Pa_GetDefaultInputDevice()];
+	}
+
+	const std::vector<Device>& DeviceManager::GetDevices() const
 	{
 		return devices;
 	}
 
-	PaDeviceIndex DeviceManager::GetActiveDevice()
+	int DeviceManager::GetSize() const
 	{
-		for (int i = 0; i < devices.size(); i++)
-		{
-			if (devices[i].active)
-			{
-				return i;
-			}
-		}
-		return -1;
+		return devices.size();
 	}
 
-	int DeviceManager::GetCount()
+	const Device& DeviceManager::at(int index) const
 	{
-		return count;
-	}
-
-	int DeviceManager::SetActiveDevice(int index)
-	{
-		//TODO(Callum): Restart stream with device active
-		//Add actual functionality to these changed states
-		for (int i = 0; i < devices.size(); i++)
-		{
-			if (devices[i].active)
-			{
-				devices[i].active = false;
-			}
-		}
-		devices[index].active = true;
-
-		return 0;
+		return devices[index];
 	}
 
 	DeviceManager::~DeviceManager()

@@ -21,7 +21,7 @@ namespace AudioPlusPlus
 	{
 		AUDIO_CORE_INFO("Shutting down Port Audio");
 		PaError err = Pa_Terminate();
-		if (err != paNoError) 
+		if (err != paNoError)
 		{
 			AUDIO_CORE_ERROR(Pa_GetErrorText(err));
 			return -1;

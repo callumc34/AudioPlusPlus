@@ -1,66 +1,35 @@
 #pragma once
-#include <AudioPlusPlus/File/Tag.h>
-#include <AudioPlusPlus/Player/Stream.h>
-#ifdef _WIN32
-#include <windows.h>
-#define ENABLE_SNDFILE_WINDOWS_PROTOTYPES 1
-#endif
+#include <AudioPlusPlus/TagHandle/TagHandle.h>
 #include <sndfile.hh>
-#include <portaudio.h>
 
 namespace AudioPlusPlus
 {
-	enum class FileFormat
-	{
-		Error,
-		NotLoaded,
-		Unsupported,
-		AIFF,
-		Wave,
-		MP3
-	};
-
 	struct FileData
 	{
 		std::string path;
-		FileFormat format;
-		int length;
+		double length;
 		int sampleRate;
-		int bitDepth;
 		int channels;
 	};
 
-	class File : private SndfileHandle
+	class IFile : protected SndfileHandle
 	{
 		public:
-			File(const std::string& path);
-			~File();
+			IFile(const std::string& path, int mode, int format,
+				int channels = 2, int samplerate = 44100);
+			~IFile();
 
-			const Tag tag;
+			const TagHandle* GetTagHandle();
+			const FileData* GetFileData();
 
-			const FileData& GetFileData();
-
-			int FillBuffer(
-				const void* inputBuffer, void* outputBuffer,
-				unsigned long framesPerBuffer,
-				const PaStreamCallbackTimeInfo* timeInfo,
-				PaStreamCallbackFlags statusFlags,
-				void* userData
-			);
-
-			static int AudioCallback(
-				const void* inputBuffer, void* outputBuffer,
-				unsigned long framesPerBuffer,
-				const PaStreamCallbackTimeInfo* timeInfo,
-				PaStreamCallbackFlags statusFlags,
-				void* userData
-			);
+			virtual int Close() = 0;
 
 		private:
-			int OpenStream(Stream* stream, PaStreamParameters OutputParameters);
-			friend class Player;
 
 		protected:
-			FileData data;
+			TagHandle* tag;
+			FileData* data;
+
+			bool closed = false;
 	};
 }

@@ -8,7 +8,8 @@
 #include <spdlog/fmt/ostr.h>
 #pragma warning(pop)
 
-namespace AudioPlusPlus {
+namespace AudioPlusPlus
+{
 	class Log
 	{
 		public:
