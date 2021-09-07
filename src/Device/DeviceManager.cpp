@@ -24,33 +24,33 @@ namespace AudioPlusPlus
 		devices.reserve(Pa_GetDeviceCount());
 		for (int i = 0; i < Pa_GetDeviceCount(); i++)
 		{
-			devices.emplace_back(i);
+			devices.push_back(new Device(i));
 		}
 	}
 
 	const Device& DeviceManager::GetDefaultOutputDevice() const
 	{
-		return devices[Pa_GetDefaultOutputDevice()];
+		return *devices[Pa_GetDefaultOutputDevice()];
 	}
 
 	const Device& DeviceManager::GetDefaultInputDevice() const
 	{
-		return devices[Pa_GetDefaultInputDevice()];
+		return *devices[Pa_GetDefaultInputDevice()];
 	}
 
-	const std::vector<Device>& DeviceManager::GetDevices() const
+	const std::vector<Device*>& DeviceManager::GetDevices() const
 	{
 		return devices;
 	}
 
 	int DeviceManager::GetSize() const
 	{
-		return devices.size();
+		return (int)devices.size();
 	}
 
 	const Device& DeviceManager::at(int index) const
 	{
-		return devices[index];
+		return *devices[index];
 	}
 
 	DeviceManager::~DeviceManager()

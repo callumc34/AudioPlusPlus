@@ -9,6 +9,8 @@ namespace AudioPlusPlus
 	class Stream
 	{
 		public:
+			operator bool() const;
+
 			PaStream** GetBuffer();
 
 			PaError SetDevice(int index);

@@ -1,5 +1,6 @@
 #pragma once
 #include <portaudio.h>
+#include <vector>
 
 namespace AudioPlusPlus
 {
@@ -7,8 +8,7 @@ namespace AudioPlusPlus
 	class Device
 	{
 		public:
-			Device(int index);
-			~Device();
+			bool operator==(const Device& rhs) const;
 
 			const PaDeviceInfo* GetInfo() const;
 			int GetIndex() const;
@@ -18,8 +18,13 @@ namespace AudioPlusPlus
 			bool IsOutput() const;
 
 		private:
+			Device(int index);
+			~Device();
+
 			int index;
 			bool input;
 			bool output;
+
+			friend class DeviceManager;
 	};
 }

@@ -9,6 +9,11 @@ namespace AudioPlusPlus
 		output = (Pa_GetDeviceInfo(index)->maxOutputChannels > 0);
 	}
 
+	bool Device::operator==(const Device& rhs) const
+	{
+		return index == rhs.GetIndex();
+	}
+
 	const PaDeviceInfo* Device::GetInfo() const
 	{
 		return Pa_GetDeviceInfo(index);

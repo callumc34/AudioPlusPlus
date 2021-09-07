@@ -7,9 +7,14 @@ namespace AudioPlusPlus
 
 	}
 
+	Stream::operator bool() const
+	{
+		return stream != 0;
+	}
+
 	PaError Stream::SetDevice(int index)
 	{
-		this->device = &DeviceManager::Get().devices[index];
+		this->device = DeviceManager::Get().devices[index];
 		return 0;
 	}
 	
