@@ -10,6 +10,5 @@ Lib
 #Local testing
 testing
 
-#Old files
-examples #Remove once done
-vendor
+#VCPKG
+vcpkg_installed

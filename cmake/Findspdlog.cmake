@@ -32,7 +32,7 @@ find_package_handle_standard_args(spdlog
 )
 
 if(SPDLOG_FOUND)
-	set(SPDLOG_LIBRARIES ${SPDLOG_LIBRARIES})
+	set(SPDLOG_LIBRARIES ${SPDLOG_LIBRARY})
 	set(SPDLOG_INCLUDE_DIRS ${SPDLOG_INCLUDE_DIR})
 
 	if (NOT TARGET spdlog::spdlog)
@@ -44,4 +44,4 @@ if(SPDLOG_FOUND)
 	endif ()
 endif()
 
-mark_as_advanced(SPDLOG_INCLUDE_DIR SPDLOG_LIBARY)
+mark_as_advanced(SPDLOG_INCLUDE_DIR SPDLOG_LIBRARY)

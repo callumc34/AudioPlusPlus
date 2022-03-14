@@ -50,10 +50,10 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
 	PRIVATE
-		${PORTAUDIO_LIBRARY}
-		${TAGLIB_LIBRARY}
-		${SNDFILE_LIBRARY}
-		$<$<BOOL:${BUILD_WITH_LOGGING}>:${SPDLOG_LIBRARY}>
+		$<$<BOOL:${PORTAUDIO_FOUND}>:PortAudio::PortAudio>
+		$<$<BOOL:${TAGLIB_FOUND}>:taglib::taglib>
+		$<$<BOOL:${SNDFILE_FOUND}>:SndFile::sndfile>
+		$<$<BOOL:${BUILD_WITH_LOGGING}>:spdlog::spdlog>
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

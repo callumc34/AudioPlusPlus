@@ -1,5 +1,3 @@
-# AudioPlusPlus
-
 <p align="center">
 <img src="logo/logo-big.png" width=50%>
 </p>
@@ -10,40 +8,45 @@ AudioPlusPlus (A++) is an early development audio playback library designed for 
 A++ is currently in very early development stages. Please consider helping by checking out the roadmap here - https://trello.com/b/67YcKpif/audioplusplus
 
 ## How to build
-1. Clone this repository to your machine using `git clone https://github.com/callumc34/AudioPlusPlus`
-2. Install the dependencies for this project:
-- [Microsoft's VCPKG](https://github.com/microsoft/vcpkg) Can be used to install the dependencies on windows using
+AudioPlusPlus can be built using CMake through the following steps.
+1. Clone this repository to your machine using `git clone https://github.com/callumc34/AudioPlusPlus` and move into the directory `cd AudioPlusPlus`
+2. Setup the build directory
 ```bash
-    vcpkg install libogg:x64-windows-static libvorbis:x64-windows-static libflac:x64-windows-static opus:x64-windows-static libogg:x86-windows-static libvorbis:x64-windows-static  libflac:x64-windows-static opus:x64-windows-static mp3lame:x64-windows-static mpg123:x64-windows-static spdlog:x64-windows-static portaudio:x64-windows-static taglib:x64-windows-static
+mkdir build
+cd build
 ```
-Similarily for linux the majority of these packages can be installed using the package manager
+3. Install the dependencies for this project:
+
+### Windows
+The preferred way to install dependencies on Windows is using [Microsoft's VCPKG](https://github.com/microsoft/vcpkg) manager.
+
+When running the following command, vcpkg will automatically install all the required dependencies.
+```bash
+cmake .. --toolchain [path to vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=[architecture-platform-static/dynamic(leave blank)]
+```
+
+### Linux
+For linux the majority of these packages can be installed using the package manager
 ```bash
 sudo apt install libasound2-dev libflac-dev libogg-dev libtool libvorbis-dev libopus-dev libmp3lame-dev libmpg123-dev libtag1-dev
 ```
-However for both vcpkg and linux some of these packages are outdated - sndfile and portaudio - and do not have the best features installed.
 
-- It is best to download all the packages and build them individually with full file support for libsndfile (URLs can be located inside the CMakeLists.txt file and will be outputted when attempting to build
+##### Note: These packages may be out of date and not provide full functionality - see alternative for a better option.
 
-3. Then the project can simply be made with cmake
-```
-mkdir build
-cd build
-cmake ..
-```
+### Alternative
+Some of the packages installed using the linux package manager may be out of date or lack full functionality.
 
-CMake will then create the output files
-- On Unix this will by default be a makefile which can be ran with
+It is recommended on linux that you manually build both portaudio and sndfile.
+
+The program will output the urls of all the packages so that you can build them yourself.
+
+##### Note: CMake on windows can have trouble finding the installed packages - use the option `-DDEPENDENCIES_ROOT=[Path to install location of dependencies]` to aid CMake in finding them.
+
+4. Build the project
 ```bash
-make
-make install
+cmake --build .
+cmake --install .
 ```
-- On Windows this will by default be a visual studio solution if the proper tools are installed.
-
-The unified command can then be run to build the files
-```
-cmake --build
-cmake --install
-````
 
 ## CMake Options - NOTE: Not all functionality is added yet
 You can pass additional options with `-D<parameter>=<value>` when you run
@@ -71,10 +74,6 @@ Or specify where to find each package individually
 - `BUILD_WITH_LOGGING` - Build with logging support (requires SpdLog)
 - `CMAKE_INSTALL_PREFIX` - build install location, the same as `--prefix` option
   of `configure` script
-  
-  **Note**: For MSVC compiler `ENABLE_STATIC_RUNTIME`is deprecated for CMake >= 3.15, see
-  policy [CMP0091](https://cmake.org/cmake/help/latest/policy/CMP0091.html).
-  Use `CMAKE_MSVC_RUNTIME_LIBRARY` option instead.
 - `ENABLE_STATIC_RUNTIME` - enable static runtime on Windows platform (MSVC and
   MinGW), `OFF` by default.
 

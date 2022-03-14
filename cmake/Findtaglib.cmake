@@ -1,3 +1,7 @@
+if (TAGLIB_INCLUDE_DIR)
+	set(TAGLIB_FIND_QUIETLY TRUE)
+endif()
+
 find_package(PkgConfig QUIET)
 pkg_check_modules(_taglib QUIET taglib)
 
@@ -44,4 +48,4 @@ if(TAGLIB_FOUND)
 	endif ()
 endif()
 
-mark_as_advanced(TAGLIB_INCLUDE_DIR TAGLIB_LIBARY)
+mark_as_advanced(TAGLIB_INCLUDE_DIR TAGLIB_LIBRARY)

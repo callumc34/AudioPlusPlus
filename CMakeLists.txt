@@ -2,6 +2,8 @@
 cmake_minimum_required(VERSION 3.8)
 cmake_policy(SET CMP0074 NEW)
 
+set(VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/ports")
+
 project(
 	"AudioPlusPlus"
 	VERSION 0.1.0
@@ -37,7 +39,7 @@ elseif (MINGW)
 endif ()
 option(BUILD_EXAMPLES "Build examples" ON)
 option(ENABLE_PACKAGE_CONFIG "Generate and install package config file" ON)
-option(INSTALL_PKGCONFIG_MODULE "Generate and isntall pkg-config module" ON)
+option(INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module" ON)
 option(BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging" ON)
 
 add_feature_info(ENABLE_STATIC_RUNTIME ENABLE_STATIC_RUNTIME "Enable static runtime")
@@ -51,7 +53,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set_package_properties(sndfile PROPERTIES
 	TYPE REQUIRED
-	URL "https://www.github.com/libsndfile/libsndfile"
+	URL "http://libsndfile.github.io/libsndfile/"
 	DESCRIPTION "A C library for reading and writing sound files containing sampled audio data"
 	PURPOSE "Audio decoding"
 )
@@ -65,7 +67,7 @@ set_package_properties(Ogg PROPERTIES
 
 set_package_properties(Vorbis PROPERTIES
 	TYPE RECOMMENDED
-	URL "https://www.vorbis.com/"
+	URL "https://xiph.org/vorbis/"
 	DESCRIPTION "open source lossy audio codec"
 	PURPOSE "Enables Vorbis support"
 )
@@ -79,14 +81,14 @@ set_package_properties(FLAC PROPERTIES
 
 set_package_properties(Opus PROPERTIES
 	TYPE RECOMMENDED
-	URL	"https://www.opus-codec.org/"
+	URL	"https://www.opus-codec.org"
 	DESCRIPTION "Standardized open source low-latency fullband codec"
 	PURPOSE	"Enables experimental Opus support"
 )
 
 set_package_properties(Mpg123 PROPERTIES
 	TYPE RECOMMENDED
-	URL "https://www.mpg123.de/"
+	URL "https://www.mpg123.org/"
 	DESCRIPTION "MPEG Audio Decoder"
 	PURPOSE "MPEG Support for sndfile"
 )
@@ -98,9 +100,9 @@ set_package_properties(Lame PROPERTIES
 	PURPOSE "MPEG Support for sndfile"
 )
 
-set_package_properties(portaudio PROPERTIES
+set_package_properties(PortAudio PROPERTIES
 	TYPE REQUIRED
-	URL "https://github.com/portaudio/portaudio"
+	URL "http://www.portaudio.com/"
 	DESCRIPTION "PortAudio is a cross-platform, open-source C language library for real-time audio input and output"
 	PURPOSE "Audio Playback"
 )

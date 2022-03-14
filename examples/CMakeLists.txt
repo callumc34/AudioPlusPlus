@@ -6,19 +6,20 @@ if(BUILD_EXAMPLES)
 	target_link_libraries(${PROJECT_NAME}-example1
 		PUBLIC
 			${PROJECT_NAME}
-			${PORTAUDIO_LIBRARY}
-			${TAGLIB_LIBRARY}
-		PRIVATE
-			${SNDFILE_LIBRARY}
-			${OGG_LIBRARY}
-			${FLAC_LIBRARY}
-			${OPUS_LIBRARY}
-			${Vorbis_Vorbis_LIBRARY}
-			${Vorbis_Enc_LIBRARY}
-			${Vorbis_File_LIBRARY}
-			${LAME_LIBRARIES}
-			${MPG123_LIBRARIES}
-			$<$<BOOL:${BUILD_WITH_LOGGING}>:${SPDLOG_LIBRARY}>
+			$<$<BOOL:${PORTAUDIO_FOUND}>:PortAudio::PortAudio>
+			$<$<BOOL:${TAGLIB_FOUND}>:taglib::taglib>
+
+		PRIVATE			
+			$<$<BOOL:${SNDFILE_FOUND}>:SndFile::sndfile>
+			$<$<BOOL:${OGG_FOUND}>:Ogg::ogg>
+			$<$<BOOL:${FLAC_FOUND}>:FLAC::FLAC>
+			$<$<BOOL:${OPUS_FOUND}>:Opus::opus>
+			$<$<BOOL:${Vorbis_Vorbis_FOUND}>:Vorbis::vorbis>
+			$<$<BOOL:${Vorbis_Enc_FOUND}>:Vorbis::vorbisenc>
+			$<$<BOOL:${Vorbis_File_FOUND}>:Vorbis::vorbisfile>
+			$<$<BOOL:${LAME_FOUND}>:Lame::Lame>
+			$<$<BOOL:${MPG123_FOUND}>:MPG123::libmpg123>
+			$<$<BOOL:${BUILD_WITH_LOGGING}>:spdlog::spdlog>
 			$<$<BOOL:${WIN32}>:shlwapi>
 	)
 
@@ -34,22 +35,23 @@ if(BUILD_EXAMPLES)
 		Example2/main.cpp
 	)
 
-	target_link_libraries(${PROJECT_NAME}-example2
+	target_link_libraries(${PROJECT_NAME}-example2		
 		PUBLIC
 			${PROJECT_NAME}
-			${PORTAUDIO_LIBRARY}
-			${TAGLIB_LIBRARY}
-		PRIVATE
-			${SNDFILE_LIBRARY}
-			${OGG_LIBRARY}
-			${FLAC_LIBRARY}
-			${OPUS_LIBRARY}
-			${Vorbis_Vorbis_LIBRARY}
-			${Vorbis_Enc_LIBRARY}
-			${Vorbis_File_LIBRARY}
-			${LAME_LIBRARIES}
-			${MPG123_LIBRARIES}
-			$<$<BOOL:${BUILD_WITH_LOGGING}>:${SPDLOG_LIBRARY}>
+			$<$<BOOL:${PORTAUDIO_FOUND}>:PortAudio::PortAudio>
+			$<$<BOOL:${TAGLIB_FOUND}>:taglib::taglib>
+
+		PRIVATE			
+			$<$<BOOL:${SNDFILE_FOUND}>:SndFile::sndfile>
+			$<$<BOOL:${OGG_FOUND}>:Ogg::ogg>
+			$<$<BOOL:${FLAC_FOUND}>:FLAC::FLAC>
+			$<$<BOOL:${OPUS_FOUND}>:Opus::opus>
+			$<$<BOOL:${Vorbis_Vorbis_FOUND}>:Vorbis::vorbis>
+			$<$<BOOL:${Vorbis_Enc_FOUND}>:Vorbis::vorbisenc>
+			$<$<BOOL:${Vorbis_File_FOUND}>:Vorbis::vorbisfile>
+			$<$<BOOL:${LAME_FOUND}>:Lame::Lame>
+			$<$<BOOL:${MPG123_FOUND}>:MPG123::libmpg123>
+			$<$<BOOL:${BUILD_WITH_LOGGING}>:spdlog::spdlog>
 			$<$<BOOL:${WIN32}>:shlwapi>
 	)
 

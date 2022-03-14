@@ -1,3 +1,7 @@
+if (SNDFILE_INCLUDE_DIR)
+	set(SNDFILE_FIND_QUIETLY TRUE)
+endif()
+
 find_package(PkgConfig QUIET)
 pkg_check_modules(_sndfile QUIET sndfile)
 
@@ -32,7 +36,7 @@ find_package_handle_standard_args(sndfile
 )
 
 if(SNDFILE_FOUND)
-	set(SNDFILE_LIBRARIES ${SNDFILE_LIBRARIES})
+	set(SNDFILE_LIBRARIES ${SNDFILE_LIBRARY})
 	set(SNDFILE_INCLUDE_DIRS ${SNDFILE_INCLUDE_DIR})
 
 	if (NOT TARGET SndFile::sndfile)
@@ -44,4 +48,4 @@ if(SNDFILE_FOUND)
 	endif ()
 endif()
 
-mark_as_advanced(SNDFILE_INCLUDE_DIR SNDFILE_LIBARY)
+mark_as_advanced(SNDFILE_INCLUDE_DIR SNDFILE_LIBRARY)
