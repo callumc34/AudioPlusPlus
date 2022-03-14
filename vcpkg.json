@@ -1,0 +1,47 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "audioplusplus",
+  "version": "0.1.0",
+  "description": "C++ Open source audio playback using PortAudio",
+  "homepage": "https://github.com/callumc34/AudioPlusPlus",
+  "dependencies": [
+    "portaudio",
+    "libsndfile"
+  ],
+  "default-features": [
+    "external-libs",
+    "mpeg",
+    "tagging",
+    "logging"
+  ],
+  "features": {
+    "external-libs": {
+      "description": "Enable OGG, FLAC, Vorbis, and Opus codecs",
+      "dependencies": [
+        "libogg",
+        "libvorbis",
+        "libflac",
+        "opus"
+      ]
+    },
+    "mpeg": {
+      "description": "Enable MPEG codecs",
+      "dependencies": [
+        "mpg123",
+        "mp3lame"
+      ]
+    },
+    "tagging": {
+      "description": "Enable file tagging support",
+      "dependencies": [
+        "taglib"
+      ]
+    },
+    "logging": {
+      "description": "Enable logging support",
+      "dependencies": [
+        "spdlog"
+      ]
+    }
+  }
+}

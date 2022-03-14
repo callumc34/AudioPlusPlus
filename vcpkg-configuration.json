@@ -1,0 +1,13 @@
+{
+  "registries": [
+    {
+      "kind": "filesystem",
+      "path": "ports",
+      "packages": [
+        "mpg123",
+        "portaudio",
+        "libsndfile"
+      ]
+    }
+  ]
+}

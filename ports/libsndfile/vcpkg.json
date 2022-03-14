@@ -1,0 +1,26 @@
+{
+  "name": "libsndfile",
+  "description": "A library for reading and writing audio files",
+  "version-semver": "1.1.0-beta.2",
+  "default-features": [
+    "external-libs",
+    "mpeg"
+  ],
+  "features": {
+    "external-libs": {
+      "description": "Enable FLAC, Vorbis, and Opus codecs",
+      "dependencies": [
+        "libvorbis",
+        "libflac",
+        "opus"
+      ]
+    },
+    "mpeg": {
+      "description": "Enable MPEG codecs",
+      "dependencies": [
+        "mpg123",
+        "mp3lame"
+      ]
+    }
+  }
+}
