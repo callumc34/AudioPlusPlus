@@ -14,11 +14,10 @@ int main(int argc, char** argv)
 	AUDIO_INFO("Recording to file: " + std::string(argv[1]));
 
 
-	audio::WriteFile x(argv[1]);
-	audio::Stream* stream = audio::StreamManager::Get().NewStream("Example1");
+	audio::WriteFile file(argv[1]);
 
 
-	audio::Recorder::Record(x, *stream);
+	audio::Stream* stream = audio::Recorder::Record(file);
 	stream->Start();
 	Pa_Sleep(5000);
 	audio::Recorder::Close(*stream);

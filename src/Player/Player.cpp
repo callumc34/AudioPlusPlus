@@ -19,12 +19,14 @@ namespace AudioPlusPlus
 
 	int Player::Play(ReadFile& file, Stream& stream, const Device& device)
 	{
-		if (stream.GetDevice() == nullptr)
-		{
-			stream.SetDevice(device);
-		}
-
 		return stream.OpenPlaybackStream(file);
+	}
+
+	Stream* Player::Play(ReadFile& file, const Device& device)
+	{
+		Stream* stream = StreamManager::Get().NewStream(file.GetFileData()->path);
+		stream->OpenPlaybackStream(file);
+		return stream;
 	}
 
 	int Player::Close(Stream& stream)

@@ -20,12 +20,14 @@ namespace AudioPlusPlus
 	int Recorder::Record(WriteFile& file, Stream& stream,
 		const Device& device)
 	{
-		if (stream.GetDevice() == nullptr)
-		{
-			stream.SetDevice(device);
-		}
-
 		return stream.OpenRecordingStream(file);
+	}
+
+	Stream* Recorder::Record(WriteFile& file, const Device& device)
+	{
+		Stream* stream = StreamManager::Get().NewStream(file.GetFileData()->path);
+		stream->OpenRecordingStream(file);
+		return stream;
 	}
 
 	int Recorder::Close(Stream& stream)

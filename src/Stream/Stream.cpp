@@ -72,6 +72,11 @@ namespace AudioPlusPlus
 			return paStreamIsNotStopped;
 		}
 
+		if (device == nullptr)
+		{
+			SetDevice(DeviceManager::Get().GetDefaultOutputDevice());
+		}
+
 		PaStreamParameters OutputParameters{
 			device->GetIndex(),
 			file.GetFileData()->channels,
@@ -103,6 +108,10 @@ namespace AudioPlusPlus
 		if (stream != 0)
 		{
 			return paStreamIsNotStopped;
+		}
+		if (device == nullptr)
+		{
+			SetDevice(DeviceManager::Get().GetDefaultInputDevice());
 		}
 
 		PaStreamParameters InputParameters{
