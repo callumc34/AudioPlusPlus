@@ -30,9 +30,9 @@ namespace AudioPlusPlus
 		return stream;
 	}
 
-	int Recorder::Close(Stream& stream)
+	int Recorder::Close(Stream* stream)
 	{
-		return stream.Close();
+		return stream->Close();
 	}
 
 	Recorder::~Recorder()

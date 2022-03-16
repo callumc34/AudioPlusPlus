@@ -29,9 +29,9 @@ namespace AudioPlusPlus
 		return stream;
 	}
 
-	int Player::Close(Stream& stream)
+	int Player::Close(Stream* stream)
 	{
-		return stream.Close();
+		return stream->Close();
 	}
 
 	Player::~Player()

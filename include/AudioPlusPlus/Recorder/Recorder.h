@@ -15,7 +15,7 @@ namespace AudioPlusPlus
 
 			static Stream* Record(WriteFile& file, const Device& device = DeviceManager::Get().GetDefaultInputDevice());
 
-			static int Close(Stream& stream);
+			static int Close(Stream* stream);
 
 		private:
 			static Recorder* instance;

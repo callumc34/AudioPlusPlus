@@ -1,10 +1,8 @@
 #include <AudioPlusPlus/AudioPlusPlus.h>
 
-namespace audio = AudioPlusPlus;
-
 int main(int argc, char** argv)
 {
-	audio::Init();
+	AudioPlusPlus::Init();
 	if (argc < 2)
 	{
 		AUDIO_ERROR("Please specify a file to write to");
@@ -14,12 +12,12 @@ int main(int argc, char** argv)
 	AUDIO_INFO("Recording to file: " + std::string(argv[1]));
 
 
-	audio::WriteFile file(argv[1]);
+	AudioPlusPlus::WriteFile file(argv[1]);
 
 
-	audio::Stream* stream = audio::Recorder::Record(file);
+	AudioPlusPlus::Stream* stream = AudioPlusPlus::Recorder::Record(file);
 	stream->Start();
 	Pa_Sleep(5000);
-	audio::Recorder::Close(*stream);
+	AudioPlusPlus::Recorder::Close(stream);
 	return 0;
 }
