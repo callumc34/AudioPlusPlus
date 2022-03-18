@@ -27,14 +27,14 @@ find_library(PORTAUDIO_LIBRARY
 )
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(portaudio
+find_package_handle_standard_args(PortAudio
 	REQUIRED_VARS
 		PORTAUDIO_LIBRARY
 		PORTAUDIO_INCLUDE_DIR
 	VERSION_VAR
 		PORTAUDIO_VERSION
 )
-message(STATUS "PORTAUDIO_FOUND=${PORTAUDIO_FOUND}")
+
 if(PORTAUDIO_FOUND)
 	set(PORTAUDIO_LIBRARIES ${PORTAUDIO_LIBRARY})
 	set(PORTAUDIO_INCLUDE_DIRS ${PORTAUDIO_INCLUDE_DIR})
