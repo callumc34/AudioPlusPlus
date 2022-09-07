@@ -8,19 +8,14 @@ namespace AudioPlusPlus
 	class Player
 	{
 		public:
-			static Player& Get();
-
-			static int Play(ReadFile& file, Stream& stream,
+			static int Load(ReadFile& file, Stream& stream,
 				const Device& device = DeviceManager::Get().GetDefaultOutputDevice());
 
-			static Stream* Play(ReadFile& file, const Device& device = DeviceManager::Get().GetDefaultOutputDevice());
+			static Stream* Load(ReadFile& file, const Device& device = DeviceManager::Get().GetDefaultOutputDevice());
+
+			static void PlayFor();
+			static void PlayFor(int ms);
 
 			static int Close(Stream* stream);
-
-		private:
-			static Player* instance;
-
-			Player();
-			~Player();
 	};
 }

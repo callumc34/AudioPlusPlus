@@ -7,6 +7,8 @@ namespace AudioPlusPlus
 	class StreamManager
 	{
 		public:
+			StreamManager(StreamManager const&) = delete;
+			void operator=(StreamManager const&) = delete;
 			static StreamManager& Get();
 
 			Stream* GetStream(const std::string& name);
@@ -15,8 +17,6 @@ namespace AudioPlusPlus
 			int DeleteStream(Stream* stream);
 
 		private:
-			static StreamManager* instance;
-
 			StreamManager();
 			~StreamManager();
 

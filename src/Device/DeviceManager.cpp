@@ -3,14 +3,11 @@
 
 namespace AudioPlusPlus
 {
-	DeviceManager* DeviceManager::instance = nullptr;
-
 	DeviceManager& DeviceManager::Get()
 	{
-		if (instance == nullptr)
-			instance = new DeviceManager();
+		static DeviceManager instance;
 
-		return *instance;
+		return instance;
 	}
 	
 	DeviceManager::DeviceManager()
@@ -55,6 +52,9 @@ namespace AudioPlusPlus
 
 	DeviceManager::~DeviceManager()
 	{
-
+		for (auto device : devices)
+		{
+			delete device;
+		}
 	}
 }

@@ -2,28 +2,13 @@
 
 namespace AudioPlusPlus
 {
-	Recorder* Recorder::instance = nullptr;
-
-	Recorder& Recorder::Get()
-	{
-		if (instance == nullptr)
-			instance = new Recorder();
-
-		return *instance;
-	}
-
-	Recorder::Recorder()
-	{
-
-	}
-
-	int Recorder::Record(WriteFile& file, Stream& stream,
+	int Recorder::Load(WriteFile& file, Stream& stream,
 		const Device& device)
 	{
 		return stream.OpenRecordingStream(file);
 	}
 
-	Stream* Recorder::Record(WriteFile& file, const Device& device)
+	Stream* Recorder::Load(WriteFile& file, const Device& device)
 	{
 		Stream* stream = StreamManager::Get().NewStream(file.GetFileData()->path);
 		stream->OpenRecordingStream(file);
@@ -33,10 +18,5 @@ namespace AudioPlusPlus
 	int Recorder::Close(Stream* stream)
 	{
 		return stream->Close();
-	}
-
-	Recorder::~Recorder()
-	{
-
 	}
 }

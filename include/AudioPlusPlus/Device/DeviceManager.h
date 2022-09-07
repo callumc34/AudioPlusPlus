@@ -7,6 +7,9 @@ namespace AudioPlusPlus
 	class DeviceManager
 	{
 		public:
+			DeviceManager(DeviceManager const&) = delete;
+			void operator=(DeviceManager const&) = delete;
+
 			static DeviceManager& Get();
 
 			const Device& GetDefaultOutputDevice() const;
@@ -18,8 +21,6 @@ namespace AudioPlusPlus
 			const Device& at(int index) const;
 
 		private:
-			static DeviceManager* instance;
-
 			DeviceManager();
 			~DeviceManager();
 

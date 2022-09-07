@@ -2,14 +2,11 @@
 
 namespace AudioPlusPlus
 {
-	StreamManager* StreamManager::instance = nullptr;
-
 	StreamManager& StreamManager::Get()
 	{
-		if (instance == nullptr)
-			instance = new StreamManager();
+		static StreamManager instance;
 
-		return *instance;
+		return instance;
 	}
 
 	StreamManager::StreamManager()
@@ -62,6 +59,9 @@ namespace AudioPlusPlus
 
 	StreamManager::~StreamManager()
 	{
-
+		for (auto s : streams)
+		{
+			delete s.second;
+		}
 	}
 }
