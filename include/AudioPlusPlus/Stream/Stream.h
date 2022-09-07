@@ -12,6 +12,10 @@ namespace AudioPlusPlus
 			struct StreamConfig
 			{
 				double volume = 1;
+
+				bool seek = false;
+				double position = 0;
+
 				ReadFile* rFile = nullptr;
 				WriteFile* wFile = nullptr;
 			};
@@ -26,6 +30,9 @@ namespace AudioPlusPlus
 
 			double SetVolume(double v);
 			double GetVolume();
+
+			double SetPosition(double position);
+			double GetPosition();
 
 			PaError Start();
 			PaError Stop();

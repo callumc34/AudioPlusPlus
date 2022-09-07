@@ -21,6 +21,11 @@ namespace AudioPlusPlus
 		return data;
 	}
 
+	double IFile::GetPosition()
+	{
+		return (double)seek(0, SEEK_CUR) / samplerate();
+	}
+
 	IFile::~IFile()
 	{
 		delete tag;

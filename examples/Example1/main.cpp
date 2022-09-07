@@ -22,7 +22,19 @@ int main(int argc, char** argv)
 	AudioPlusPlus::Stream* stream = AudioPlusPlus::Player::Load(file);
 	stream->SetVolume(0.2);
 	stream->Start();
-	AudioPlusPlus::Wait(5);
+	AudioPlusPlus::Wait(2);
+	stream->SetVolume(0.5);
+	stream->Stop();
+
+	AudioPlusPlus::Wait(2);
+	stream->Start();
+	AudioPlusPlus::Wait(2);
+
+	stream->SetPosition(10.35);
+	AudioPlusPlus::Wait(2);
+
+	AUDIO_INFO(std::to_string(stream->GetPosition()));
+
 	AudioPlusPlus::Player::Close(stream);
 	return 0;
 }

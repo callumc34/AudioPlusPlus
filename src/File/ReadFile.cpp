@@ -27,7 +27,7 @@ namespace AudioPlusPlus
 		void* userData
 	)
 	{
-		//unused suppression
+		// Unused suppression
 		(void)inputBuffer;
 		(void)statusFlags;
 
@@ -38,14 +38,20 @@ namespace AudioPlusPlus
 
 		sf_count_t numRead;
 
-		//Clear output buffer
+		// Clear output buffer
 		memset(out, 0, sizeof(float) * framesPerBuffer * data->channels);
+
+		if (cfg->seek)
+		{
+			seek(static_cast<sf_count_t>(cfg->position), SEEK_SET);
+			cfg->seek = false;
+		}
 
 		numRead = read(out, framesPerBuffer * data->channels);
 
-		for (int i = 0; i < framesPerBuffer * data->channels; i++)
+		for (unsigned long i = 0; i < framesPerBuffer * data->channels; i++)
 		{
-			*out *= cfg->volume;
+			*out *= static_cast<float>(cfg->volume);
 			out++;
 		}
 

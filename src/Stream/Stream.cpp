@@ -45,10 +45,32 @@ namespace AudioPlusPlus
 		return config.volume;
 	}
 
+	double Stream::SetPosition(double position)
+	{
+		config.seek = true;
+
+		// Get samplerate
+		const PaStreamInfo* info = Pa_GetStreamInfo(stream);
+
+		// Seek skips n frames
+		config.position = (double)position * info->sampleRate;
+		return 0;
+	}
+
+	double Stream::GetPosition()
+	{
+		if (config.rFile != nullptr) return config.rFile->GetPosition();
+		if (config.wFile != nullptr) return config.wFile->GetPosition();
+		return -1;
+	}
+
 	PaError Stream::Start()
 	{
 		if (stream == 0)
 			return paNotInitialized;
+
+		if (Pa_IsStreamActive(stream))
+			return paStreamIsNotStopped;
 
 		PaError err = Pa_StartStream(stream);
 
@@ -59,6 +81,9 @@ namespace AudioPlusPlus
 	{
 		if (stream == 0)
 			return paNotInitialized;
+
+		if (Pa_IsStreamStopped(stream))
+			return paStreamIsStopped;
 
 		PaError err = Pa_StopStream(stream);
 		active = false;

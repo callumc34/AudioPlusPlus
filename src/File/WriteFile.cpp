@@ -40,7 +40,7 @@ namespace AudioPlusPlus
 			finished = paComplete;
 		}
 
-		sf_count_t writeCount = write(samples, framesPerBuffer * data->channels);
+		sf_count_t writeCount = write(samples, static_cast<sf_count_t>(framesPerBuffer) * data->channels);
 
 		if (writeCount <= 0)
 		{

@@ -21,6 +21,7 @@ namespace AudioPlusPlus
 
 			const TagHandle* GetTagHandle();
 			const FileData* GetFileData();
+			double GetPosition();
 
 			virtual int Close() = 0;
 
