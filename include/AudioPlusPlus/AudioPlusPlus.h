@@ -24,5 +24,6 @@
 namespace AudioPlusPlus
 {
 	int Init();
+	void Wait(double seconds);
 	int Exit();
 }

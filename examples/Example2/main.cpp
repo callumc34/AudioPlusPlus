@@ -15,9 +15,9 @@ int main(int argc, char** argv)
 	AudioPlusPlus::WriteFile file(argv[1]);
 
 
-	AudioPlusPlus::Stream* stream = AudioPlusPlus::Recorder::Record(file);
+	AudioPlusPlus::Stream* stream = AudioPlusPlus::Recorder::Load(file);
 	stream->Start();
-	Pa_Sleep(5000);
+	AudioPlusPlus::Wait(5);
 	AudioPlusPlus::Recorder::Close(stream);
 	return 0;
 }

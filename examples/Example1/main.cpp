@@ -19,9 +19,9 @@ int main(int argc, char** argv)
 	//Play audio
 	AUDIO_INFO("Playing from file...");
 
-	AudioPlusPlus::Stream* stream = AudioPlusPlus::Player::Play(file);
+	AudioPlusPlus::Stream* stream = AudioPlusPlus::Player::Load(file);
 	stream->Start();
-	Pa_Sleep(10000);
+	AudioPlusPlus::Wait(5);
 	AudioPlusPlus::Player::Close(stream);
 	return 0;
 }
