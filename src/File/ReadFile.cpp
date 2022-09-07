@@ -1,4 +1,5 @@
 #include <AudioPlusPlus/File/ReadFile.h>
+#include <AudioPlusPlus/Stream/Stream.h>
 #ifdef __linux__
 #include <cstring>
 #endif
@@ -28,8 +29,9 @@ namespace AudioPlusPlus
 	{
 		//unused suppression
 		(void)inputBuffer;
-		(void)userData;
 		(void)statusFlags;
+
+		Stream::StreamConfig* cfg = static_cast<Stream::StreamConfig*>(userData);
 
 		float* out = (float*)outputBuffer;
 		int finished = paContinue;
@@ -40,6 +42,12 @@ namespace AudioPlusPlus
 		memset(out, 0, sizeof(float) * framesPerBuffer * data->channels);
 
 		numRead = read(out, framesPerBuffer * data->channels);
+
+		for (int i = 0; i < framesPerBuffer * data->channels; i++)
+		{
+			*out *= cfg->volume;
+			out++;
+		}
 
 		if (numRead < framesPerBuffer)
 			finished = paComplete;

@@ -20,6 +20,7 @@ int main(int argc, char** argv)
 	AUDIO_INFO("Playing from file...");
 
 	AudioPlusPlus::Stream* stream = AudioPlusPlus::Player::Load(file);
+	stream->SetVolume(0.2);
 	stream->Start();
 	AudioPlusPlus::Wait(5);
 	AudioPlusPlus::Player::Close(stream);

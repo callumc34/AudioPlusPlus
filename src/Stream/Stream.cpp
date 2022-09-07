@@ -1,4 +1,5 @@
 #include <AudioPlusPlus/Stream/Stream.h>
+#include <functional>
 
 namespace AudioPlusPlus
 {
@@ -10,6 +11,11 @@ namespace AudioPlusPlus
 	Stream::operator bool() const
 	{
 		return stream != 0;
+	}
+
+	PaStream** Stream::GetBuffer()
+	{
+		return &stream;
 	}
 
 	PaError Stream::SetDevice(int index)
@@ -26,6 +32,17 @@ namespace AudioPlusPlus
 	const Device* Stream::GetDevice()
 	{
 		return device;
+	}
+
+	double Stream::SetVolume(double volume)
+	{
+		config.volume = volume;
+		return config.volume;
+	}
+
+	double Stream::GetVolume()
+	{
+		return config.volume;
 	}
 
 	PaError Stream::Start()
@@ -60,11 +77,6 @@ namespace AudioPlusPlus
 		return err;
 	}
 
-	PaStream** Stream::GetBuffer()
-	{
-		return &stream;
-	}
-
 	PaError Stream::OpenPlaybackStream(ReadFile& file)
 	{
 		if (stream != 0)
@@ -85,6 +97,8 @@ namespace AudioPlusPlus
 			NULL
 		};
 
+		config.rFile = &file;
+
 		int err = Pa_OpenStream(
 			&stream,
 			nullptr,
@@ -92,8 +106,8 @@ namespace AudioPlusPlus
 			file.GetFileData()->sampleRate,
 			paFramesPerBufferUnspecified,
 			paClipOff,
-			&Stream::OpenPlaybackStreamCallback,
-			static_cast<void*>(&file)
+			&OpenPlaybackStreamCallback,
+			static_cast<void*>(this)
 		);
 
 		if (!err)
@@ -122,6 +136,8 @@ namespace AudioPlusPlus
 			NULL
 		};
 
+		config.wFile = &file;
+
 		int err = Pa_OpenStream(
 			&stream,
 			&InputParameters,
@@ -129,8 +145,8 @@ namespace AudioPlusPlus
 			file.GetFileData()->sampleRate,
 			paFramesPerBufferUnspecified,
 			paClipOff,
-			&Stream::OpenRecordingStreamCallback,
-			static_cast<void*>(&file)
+			&OpenRecordingStreamCallback,
+			static_cast<void*>(this)
 		);
 
 		if (!err)
@@ -140,7 +156,7 @@ namespace AudioPlusPlus
 		return err;
 	}
 
-	int Stream::OpenPlaybackStreamCallback(
+	int Stream::ReadFromFileCallback(
 		const void* inputBuffer, void* outputBuffer,
 		unsigned long framesPerBuffer,
 		const PaStreamCallbackTimeInfo* timeInfo,
@@ -148,16 +164,16 @@ namespace AudioPlusPlus
 		void* userData
 	)
 	{
-		return (static_cast<ReadFile*>(userData)->ReadToBuffer(
+		return config.rFile->ReadToBuffer(
 			inputBuffer, outputBuffer,
 			framesPerBuffer,
 			timeInfo,
 			statusFlags,
-			userData
-		));
+			static_cast<void*>(&config)
+		);
 	}
 
-	int Stream::OpenRecordingStreamCallback(
+	int Stream::WriteToFileCallback(
 		const void* inputBuffer, void* outputBuffer,
 		unsigned long framesPerBuffer,
 		const PaStreamCallbackTimeInfo* timeInfo,
@@ -165,16 +181,50 @@ namespace AudioPlusPlus
 		void* userData
 	)
 	{
-		return (static_cast<WriteFile*>(userData)->WriteToBuffer(
+		return config.wFile->WriteToBuffer(
 			inputBuffer, outputBuffer,
 			framesPerBuffer,
 			timeInfo,
 			statusFlags,
-			userData
-		));
+			static_cast<void*>(&config)
+		);
 	}
 
 	Stream::~Stream()
 	{
+	}
+
+	static int OpenPlaybackStreamCallback(
+		const void* inputBuffer, void* outputBuffer,
+		unsigned long framesPerBuffer,
+		const PaStreamCallbackTimeInfo* timeInfo,
+		PaStreamCallbackFlags statusFlags,
+		void* userData
+	)
+	{
+		return static_cast<Stream*>(userData)->ReadFromFileCallback(
+			inputBuffer, outputBuffer,
+			framesPerBuffer,
+			timeInfo,
+			statusFlags,
+			nullptr
+		);
+	}
+
+	static int OpenRecordingStreamCallback(
+		const void* inputBuffer, void* outputBuffer,
+		unsigned long framesPerBuffer,
+		const PaStreamCallbackTimeInfo* timeInfo,
+		PaStreamCallbackFlags statusFlags,
+		void* userData
+	)
+	{
+		return static_cast<Stream*>(userData)->WriteToFileCallback(
+			inputBuffer, outputBuffer,
+			framesPerBuffer,
+			timeInfo,
+			statusFlags,
+			nullptr
+		);
 	}
 }
