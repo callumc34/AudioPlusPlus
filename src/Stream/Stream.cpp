@@ -1,5 +1,4 @@
 #include <AudioPlusPlus/Stream/Stream.h>
-#include <functional>
 
 namespace AudioPlusPlus
 {

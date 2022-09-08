@@ -6,9 +6,9 @@ set(VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/ports")
 
 project(
 	"AudioPlusPlus"
-	VERSION 0.1.0
+	VERSION 0.2.0
 	LANGUAGES CXX
-	DESCRIPTION "Open source library for interacting with audio files"
+	DESCRIPTION "C++ open source audio playback & recording with file support."
 	HOMEPAGE_URL https://github.com/callumc34/audioplusplus
 )
 
@@ -26,10 +26,14 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+#Dependencies
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 #Includes
 include(FeatureSummary)
 include(GNUInstallDirs)
 include(CMakeDependentOption)
+include(FindLibCheck)
 
 #Options
 if (MSVC AND (DEFINED ENABLE_STATIC_RUNTIME))
@@ -40,16 +44,15 @@ endif ()
 option(BUILD_EXAMPLES "Build examples" ON)
 option(ENABLE_PACKAGE_CONFIG "Generate and install package config file" ON)
 option(INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module" ON)
-option(BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging" ON)
+option(BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging" ${SPDLOG_FOUND})
+option(BUILD_DOCUMENTATION "Build doxygen documentation - requires doxygen" ${DOXYGEN_FOUND})
 
 add_feature_info(ENABLE_STATIC_RUNTIME ENABLE_STATIC_RUNTIME "Enable static runtime")
 add_feature_info(BUILD_EXAMPLES BUILD_EXAMPLES "Build examples")
 add_feature_info(ENABLE_PACKAGE_CONFIG ENABLE_PACKAGE_CONFIG "Generate and install package config files")
 add_feature_info(INSTALL_PKGCONFIG_MODULE INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module")
 add_feature_info(BUILD_WITH_LOGGING BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging")
-
-#Dependencies
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+add_feature_info(BUILD_DOCUMENTATION BUILD_DOCUMENTATION "Build doxygen documentation - requires doxygen")
 
 set_package_properties(sndfile PROPERTIES
 	TYPE REQUIRED
@@ -121,8 +124,6 @@ set_package_properties(taglib PROPERTIES
 	PURPOSE "ID3 Tag reading"
 )
 
-include(FindLibCheck)
-
 include_directories("include")
 add_subdirectory("src")
 
@@ -154,6 +155,26 @@ endif()
 
 if(BUILD_EXAMPLES)
 	add_subdirectory("examples")
+endif()
+
+if(BUILD_DOCUMENTATION AND DOXYGEN_FOUND)
+	set(DOXYGEN_IN ${CMAKE_SOURCE_DIR}/doc/doxy.config.in)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/doc/doxy.config)
+	
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+
+	add_custom_target(doc_doxygen ALL
+		COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/
+		COMMENT "Building doxygen documentation."
+		VERBATIM
+	)
+
+	install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doc/html/"
+		DESTINATION "${CMAKE_INSTALL_DOCDIR}"
+	)
+elseif(BUILD_DOCUMENTATION AND NOT DOXYGEN_FOUND)
+	message(WARNING "Documentation was set on but doxygen was not found. Cannot build documentation.")
 endif()
 
 #Installation

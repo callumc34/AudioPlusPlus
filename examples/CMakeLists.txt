@@ -1,9 +1,9 @@
 if(BUILD_EXAMPLES)
-	add_executable(${PROJECT_NAME}-example1
-		Example1/main.cpp
+	add_executable(${PROJECT_NAME}-playback-example
+		playback.cpp
 	)
 
-	target_link_libraries(${PROJECT_NAME}-example1
+	target_link_libraries(${PROJECT_NAME}-playback-example
 		PUBLIC
 			${PROJECT_NAME}
 			$<$<BOOL:${PORTAUDIO_FOUND}>:PortAudio::PortAudio>
@@ -23,7 +23,7 @@ if(BUILD_EXAMPLES)
 			$<$<BOOL:${WIN32}>:shlwapi>
 	)
 
-	target_include_directories(${PROJECT_NAME}-example1
+	target_include_directories(${PROJECT_NAME}-playback-example
 		PUBLIC
 			${SNDFILE_INCLUDE_DIR}
 			${PORTAUDIO_INCLUDE_DIR}
@@ -31,11 +31,11 @@ if(BUILD_EXAMPLES)
 			${SPDLOG_INCLUDE_DIR}
 	)
 
-	add_executable(${PROJECT_NAME}-example2
-		Example2/main.cpp
+	add_executable(${PROJECT_NAME}-recording-example
+		recording.cpp
 	)
 
-	target_link_libraries(${PROJECT_NAME}-example2		
+	target_link_libraries(${PROJECT_NAME}-recording-example		
 		PUBLIC
 			${PROJECT_NAME}
 			$<$<BOOL:${PORTAUDIO_FOUND}>:PortAudio::PortAudio>
@@ -55,7 +55,7 @@ if(BUILD_EXAMPLES)
 			$<$<BOOL:${WIN32}>:shlwapi>
 	)
 
-	target_include_directories(${PROJECT_NAME}-example2
+	target_include_directories(${PROJECT_NAME}-recording-example
 		PUBLIC
 			${SNDFILE_INCLUDE_DIR}
 			${PORTAUDIO_INCLUDE_DIR}

@@ -4,7 +4,7 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: @PACKAGE_NAME@
-Description: Open source library for interacting with audio files
+Description: @DESCRIPTION@
 URL: @PROJECT_HOMEPAGE_URL@
 Requires: @REQUIRES_PUBLIC@
 Requires.private: @REQUIRES_PRIVATE@

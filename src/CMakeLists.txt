@@ -55,7 +55,3 @@ target_link_libraries(${PROJECT_NAME}
 		$<$<BOOL:${SNDFILE_FOUND}>:SndFile::sndfile>
 		$<$<BOOL:${BUILD_WITH_LOGGING}>:spdlog::spdlog>
 )
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-	PUBLIC_HEADER "${audioplusplus_HDRS}"
-)

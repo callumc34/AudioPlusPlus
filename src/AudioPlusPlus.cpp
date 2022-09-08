@@ -1,5 +1,7 @@
 #include <AudioPlusPlus/AudioPlusPlus.h>
 #include <portaudio.h>
+#include <chrono>
+#include <thread>
 
 namespace AudioPlusPlus
 {
