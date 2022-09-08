@@ -71,7 +71,7 @@ namespace AudioPlusPlus
 			StreamConfig config;
 			bool active = false;
 
-			friend static int OpenPlaybackStreamCallback(
+			friend int OpenPlaybackStreamCallback(
 				const void* inputBuffer, void* outputBuffer,
 				unsigned long framesPerBuffer,
 				const PaStreamCallbackTimeInfo* timeInfo,
@@ -79,7 +79,7 @@ namespace AudioPlusPlus
 				void* userData
 			);
 
-			friend 	static int OpenRecordingStreamCallback(
+			friend  int OpenRecordingStreamCallback(
 				const void* inputBuffer, void* outputBuffer,
 				unsigned long framesPerBuffer,
 				const PaStreamCallbackTimeInfo* timeInfo,

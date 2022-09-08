@@ -2,6 +2,41 @@
 
 namespace AudioPlusPlus
 {
+
+	int OpenPlaybackStreamCallback(
+		const void* inputBuffer, void* outputBuffer,
+		unsigned long framesPerBuffer,
+		const PaStreamCallbackTimeInfo* timeInfo,
+		PaStreamCallbackFlags statusFlags,
+		void* userData
+	)
+	{
+		return static_cast<Stream*>(userData)->ReadFromFileCallback(
+			inputBuffer, outputBuffer,
+			framesPerBuffer,
+			timeInfo,
+			statusFlags,
+			nullptr
+		);
+	}
+
+	int OpenRecordingStreamCallback(
+		const void* inputBuffer, void* outputBuffer,
+		unsigned long framesPerBuffer,
+		const PaStreamCallbackTimeInfo* timeInfo,
+		PaStreamCallbackFlags statusFlags,
+		void* userData
+	)
+	{
+		return static_cast<Stream*>(userData)->WriteToFileCallback(
+			inputBuffer, outputBuffer,
+			framesPerBuffer,
+			timeInfo,
+			statusFlags,
+			nullptr
+		);
+	}
+
 	Stream::Stream()
 	{
 
@@ -232,39 +267,5 @@ namespace AudioPlusPlus
 
 	Stream::~Stream()
 	{
-	}
-
-	static int OpenPlaybackStreamCallback(
-		const void* inputBuffer, void* outputBuffer,
-		unsigned long framesPerBuffer,
-		const PaStreamCallbackTimeInfo* timeInfo,
-		PaStreamCallbackFlags statusFlags,
-		void* userData
-	)
-	{
-		return static_cast<Stream*>(userData)->ReadFromFileCallback(
-			inputBuffer, outputBuffer,
-			framesPerBuffer,
-			timeInfo,
-			statusFlags,
-			nullptr
-		);
-	}
-
-	static int OpenRecordingStreamCallback(
-		const void* inputBuffer, void* outputBuffer,
-		unsigned long framesPerBuffer,
-		const PaStreamCallbackTimeInfo* timeInfo,
-		PaStreamCallbackFlags statusFlags,
-		void* userData
-	)
-	{
-		return static_cast<Stream*>(userData)->WriteToFileCallback(
-			inputBuffer, outputBuffer,
-			framesPerBuffer,
-			timeInfo,
-			statusFlags,
-			nullptr
-		);
 	}
 }

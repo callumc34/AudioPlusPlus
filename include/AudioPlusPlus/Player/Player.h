@@ -13,9 +13,6 @@ namespace AudioPlusPlus
 
 			static Stream* Load(ReadFile& file, const Device& device = DeviceManager::Get().GetDefaultOutputDevice());
 
-			static void PlayFor();
-			static void PlayFor(int ms);
-
 			static int Close(Stream* stream);
 	};
 }
