@@ -76,6 +76,7 @@ Or specify where to find each package individually
   of `configure` script
 - `ENABLE_STATIC_RUNTIME` - enable static runtime on Windows platform (MSVC and
   MinGW), `OFF` by default.
+- `BUILD_DOCUMENTATION` - Builds the doxygen documentation,
 
 ## Examples
 Check out the examples folder for how to integrate into your app.

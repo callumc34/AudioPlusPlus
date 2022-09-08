@@ -36,8 +36,6 @@ namespace AudioPlusPlus
 		float* out = (float*)outputBuffer;
 		int finished = paContinue;
 
-		sf_count_t numRead;
-
 		// Clear output buffer
 		memset(out, 0, sizeof(float) * framesPerBuffer * data->channels);
 
@@ -47,12 +45,24 @@ namespace AudioPlusPlus
 			cfg->seek = false;
 		}
 
-		numRead = read(out, framesPerBuffer * data->channels);
+		sf_count_t numRead = read(out, static_cast<sf_count_t>(framesPerBuffer) * data->channels);
 
-		for (unsigned long i = 0; i < framesPerBuffer * data->channels; i++)
+		if (cfg->loop)
 		{
-			*out *= static_cast<float>(cfg->volume);
-			out++;
+			sf_count_t position = seek(0, SEEK_CUR);
+			if (position < cfg->start * samplerate() || position >= cfg->end * samplerate())
+			{
+				seek(cfg->start * samplerate(), SEEK_SET);
+			}
+		}
+
+		if (cfg->volume != 1)
+		{
+			for (unsigned long i = 0; i < framesPerBuffer * data->channels; i++)
+			{
+				*out *= static_cast<float>(cfg->volume);
+				out++;
+			}
 		}
 
 		if (numRead < framesPerBuffer)

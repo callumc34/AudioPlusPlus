@@ -1,8 +1,8 @@
 #pragma once
-#include <portaudio.h>
 #include <AudioPlusPlus/Device/DeviceManager.h>
 #include <AudioPlusPlus/File/ReadFile.h>
 #include <AudioPlusPlus/File/WriteFile.h>
+#include <portaudio.h>
 
 namespace AudioPlusPlus
 {
@@ -15,6 +15,10 @@ namespace AudioPlusPlus
 
 				bool seek = false;
 				double position = 0;
+
+				bool loop = false;
+				double start = 0;
+				double end = 0;
 
 				ReadFile* rFile = nullptr;
 				WriteFile* wFile = nullptr;
@@ -33,6 +37,9 @@ namespace AudioPlusPlus
 
 			double SetPosition(double position);
 			double GetPosition();
+
+			void SetLoop(double start, double end);
+			int StopLoop();
 
 			PaError Start();
 			PaError Stop();

@@ -33,6 +33,9 @@ int main(int argc, char** argv)
 	stream->SetPosition(10.35);
 	AudioPlusPlus::Wait(2);
 
+	stream->SetLoop(20, 21);
+	AudioPlusPlus::Wait(5);
+
 	AUDIO_INFO("Position: " + std::to_string(stream->GetPosition()));
 
 	AudioPlusPlus::Player::Close(stream);

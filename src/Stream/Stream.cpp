@@ -63,6 +63,22 @@ namespace AudioPlusPlus
 		return -1;
 	}
 
+	void Stream::SetLoop(double start, double end)
+	{
+		config.loop = true;
+		config.start = start;
+		config.end = end;
+	}
+
+	int Stream::StopLoop()
+	{
+		if (!config.loop)
+			return -1;
+
+		config.loop = false;
+		return true;
+	}
+
 	PaError Stream::Start()
 	{
 		if (stream == 0)
