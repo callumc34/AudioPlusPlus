@@ -7,7 +7,7 @@ AudioPlusPlus (A++) is an early development audio playback library designed for 
 
 A++ aims to be an easy to use and develop audio library that plugs straight into your program. It does all the interaction between many great open source audio libraries for you.
 
-A++ is currently in very early development stages. Please consider helping by checking out the roadmap here - https://trello.com/b/67YcKpif/audioplusplus
+A++ is currently in very early development stages. Please consider helping by checking out the [roadmap](https://trello.com/b/67YcKpif/audioplusplus). 
 
 ## How to build
 AudioPlusPlus can be built using CMake through the following steps.
@@ -28,10 +28,13 @@ cmake .. --toolchain [path to vcpkg]/scripts/buildsystems/vcpkg.cmake -DVCPKG_TA
 ```
 
 ### Linux
-For linux the majority of these packages can be installed using the package manager
+For linux the majority of these packages can be installed using the package manager.
 ```bash
-sudo apt install libasound2-dev libflac-dev libogg-dev libtool libvorbis-dev libopus-dev libmp3lame-dev libmpg123-dev libtag1-dev
+sudo apt install doxygen libasound2-dev libsndfile-dev libflac-dev libogg-dev libtool libvorbis-dev libopus-dev libmp3lame-dev libmpg123-dev libtag1-dev
 ```
+
+[PortAudio](https://github.com/portaudio/portaudio) is currently outdated on package manager and thus the most recent version must be manually built and installed.
+[SpdLog](https://github.com/gabime/spdlog) currently does not work when installed with package manager and thus must be manually built and installed.
 
 ##### Note: These packages may be out of date and not provide full functionality - see alternative for a better option.
 
