@@ -23,7 +23,26 @@
 
 namespace AudioPlusPlus
 {
+	/**
+	 * @brief      Initializes AudioPlusPlus.
+	 *
+	 * @return     Error code.
+	 */
 	int Init();
+
+	/**
+	 * @brief      Allows the thread to sleep for a much more precise time than sleep().
+	 *
+	 * Used to allow audio to continue playing when there is no code to execute.
+	 * 
+	 * @param[in]  seconds  The seconds to sleep for.
+	 */
 	void Wait(double seconds);
+
+	/**
+	 * @brief      Exit AudioPlusPlus.
+	 *
+	 * @return     Error code.
+	 */
 	int Exit();
 }

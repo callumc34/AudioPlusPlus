@@ -5,6 +5,8 @@
 ## About AudioPlusPlus
 AudioPlusPlus (A++) is an early development audio playback library designed for easy integration with any programs.
 
+A++ aims to be an easy to use and develop audio library that plugs straight into your program. It does all the interaction between many great open source audio libraries for you.
+
 A++ is currently in very early development stages. Please consider helping by checking out the roadmap here - https://trello.com/b/67YcKpif/audioplusplus
 
 ## How to build

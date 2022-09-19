@@ -10,12 +10,31 @@
 
 namespace AudioPlusPlus
 {
+	/**
+	 * @brief      Logging functionality for port audio.
+	 */
 	class Log
 	{
 		public:
+			/**
+			 * @brief      Initialise the logging functionality.
+			 * 
+			 * If not called before attempting to log, the program will crash.
+			 */
 			static void Init();
 
+			/**
+			 * @brief      Gets the core logger instance.
+			 *
+			 * @return     The core logger.
+			 */
 			static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return CoreLogger; }
+
+			/**
+			 * @brief      Gets the client logger instance.
+			 *
+			 * @return     The client logger.
+			 */
 			static std::shared_ptr<spdlog::logger>& GetClientLogger() { return ClientLogger; }
 
 		private:
@@ -38,7 +57,10 @@ namespace AudioPlusPlus
 #define AUDIO_WARN(...) ::AudioPlusPlus::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define AUDIO_ERROR(...) ::AudioPlusPlus::Log::GetClientLogger()->error(__VA_ARGS__)
 #define AUDIO_CRITICAL(...) ::AudioPlusPlus::Log::GetClientLogger()->critical(__VA_ARGS__)
+
+// If logging is not enabled define empty macros.
 #else
+
 //Core log macros for the library
 #define AUDIO_CORE_TRACE(...) 
 #define AUDIO_CORE_INFO(...) 
