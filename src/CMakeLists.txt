@@ -1,6 +1,11 @@
+if(BUILD_WITH_LOGGING)
+	add_compile_definitions(ENABLE_LOGGING=True)
+endif()
+
 add_library(${PROJECT_NAME}
 	"Device/Device.cpp"
 	"Device/DeviceManager.cpp"
+	"Exceptions/Exception.cpp"
 	"File/File.cpp"
 	"File/WriteFile.cpp"
 	"File/ReadFile.cpp"
@@ -13,15 +18,12 @@ add_library(${PROJECT_NAME}
 	"AudioPlusPlus.cpp"
 )
 
-if(BUILD_WITH_LOGGING)
-	add_compile_definitions(ENABLE_LOGGING=True)
-endif()
-
 #public AudioPlusPlus headers
 set(audioplusplus_HDRS
 	"include/AudioPlusPlus/Device/Device.h"
 	"include/AudioPlusPlus/Device/DeviceManager.h"
 	"include/AudioPlusPlus/Device/DeviceManager.h"
+	"include/AudioPlusPlus/Exceptions/Exception.h"
 	"include/AudioPlusPlus/File/File.h"
 	"include/AudioPlusPlus/File/WriteFile.h"
 	"include/AudioPlusPlus/File/ReadFile.h"
