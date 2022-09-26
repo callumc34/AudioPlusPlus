@@ -5,10 +5,6 @@
 // Exceptions
 #include <AudioPlusPlus/Exceptions/Exception.h>
 
-// Files
-#include <AudioPlusPlus/File/SndReadFile.h>
-#include <AudioPlusPlus/File/SndWriteFile.h>
-
 // Log
 #include <AudioPlusPlus/Log/Log.h>
 

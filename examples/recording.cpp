@@ -1,4 +1,5 @@
 #include <AudioPlusPlus/AudioPlusPlus.h>
+#include <AudioPlusPlus/File/SndWriteFile.h>
 
 int main(int argc, char** argv)
 {

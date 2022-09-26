@@ -41,12 +41,14 @@ if (MSVC AND (DEFINED ENABLE_STATIC_RUNTIME))
 elseif (MINGW)
 	option (ENABLE_STATIC_RUNTIME "Enable static runtime" OFF)
 endif ()
-option(BUILD_EXAMPLES "Build examples" ON)
+option(ENABLE_SNDFILE "Enable SndFile audio interaction" ${SNDFILE_FOUND})
+option(BUILD_EXAMPLES "Build examples - requires SndFile" ${SNDFILE_FOUND})
 option(ENABLE_PACKAGE_CONFIG "Generate and install package config file" ON)
 option(INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module" ON)
 option(BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging" ${SPDLOG_FOUND})
 option(BUILD_DOCUMENTATION "Build doxygen documentation - requires doxygen" ${DOXYGEN_FOUND})
 
+add_feature_info(ENABLE_SNDFILE ENABLE_SNDFILE "Enable SndFile audio interaction")
 add_feature_info(ENABLE_STATIC_RUNTIME ENABLE_STATIC_RUNTIME "Enable static runtime")
 add_feature_info(BUILD_EXAMPLES BUILD_EXAMPLES "Build examples")
 add_feature_info(ENABLE_PACKAGE_CONFIG ENABLE_PACKAGE_CONFIG "Generate and install package config files")
@@ -54,11 +56,25 @@ add_feature_info(INSTALL_PKGCONFIG_MODULE INSTALL_PKGCONFIG_MODULE "Generate and
 add_feature_info(BUILD_WITH_LOGGING BUILD_WITH_LOGGING "Build with SpdLog for extra debug logging")
 add_feature_info(BUILD_DOCUMENTATION BUILD_DOCUMENTATION "Build doxygen documentation - requires doxygen")
 
-set_package_properties(sndfile PROPERTIES
+set_package_properties(PortAudio PROPERTIES
 	TYPE REQUIRED
+	URL "http://www.portaudio.com/"
+	DESCRIPTION "PortAudio is a cross-platform, open-source C language library for real-time audio input and output"
+	PURPOSE "Audio Playback"
+)
+
+set_package_properties(taglib PROPERTIES
+	TYPE REQUIRED
+	URL "https://taglib.org/"
+	DESCRIPTION "Audio meta-data library"
+	PURPOSE "ID3 Tag reading"
+)
+
+set_package_properties(sndfile PROPERTIES
+	TYPE RECOMMENDED
 	URL "http://libsndfile.github.io/libsndfile/"
 	DESCRIPTION "A C library for reading and writing sound files containing sampled audio data"
-	PURPOSE "Audio decoding"
+	PURPOSE "Audio file IO"
 )
 
 set_package_properties(Ogg PROPERTIES
@@ -103,25 +119,11 @@ set_package_properties(Lame PROPERTIES
 	PURPOSE "MPEG Support for sndfile"
 )
 
-set_package_properties(PortAudio PROPERTIES
-	TYPE REQUIRED
-	URL "http://www.portaudio.com/"
-	DESCRIPTION "PortAudio is a cross-platform, open-source C language library for real-time audio input and output"
-	PURPOSE "Audio Playback"
-)
-
 set_package_properties(spdlog PROPERTIES
 	TYPE RECOMMENDED
 	URL "https://github.com/gabime/spdlog"
 	DESCRIPTION "Fast C++ logging library"
 	PURPOSE "Logging"
-)
-
-set_package_properties(taglib PROPERTIES
-	TYPE REQUIRED
-	URL "https://taglib.org/"
-	DESCRIPTION "Audio meta-data library"
-	PURPOSE "ID3 Tag reading"
 )
 
 include_directories("include")
@@ -142,12 +144,16 @@ if(INSTALL_PKGCONFIG_MODULE)
 	set(includedir "\$\{prefix\}/${CMAKE_INSTALL_INCLUDEDIR}")
 	set(VERSION ${PROJECT_VERSION})
 	set(REQUIRES_PUBLIC "")
-	set(REQUIRES_PRIVATE "taglib portaudio sndfile flac ogg vorbis vorbisenc opus libmpg123")
+	set(REQUIRES_PRIVATE "taglib portaudio")
 	set(PUBLIC_LIBS "")
-	set(PRIVATE_LIB "-lsndfile -lportaudio -ltaglib")
+	set(PRIVATE_LIBS "-lportaudio -ltaglib")
+	if(ENABLE_SNDFILE)
+		set(REQUIRES_PRIVATE "${REQUIRES_PRIVATE} sndfile flac ogg vorbis vorbisenc opus libmpg123")
+		set(PRIVATE_LIBS "${PRIVATE_LIBS} -lsndfile")
+	endif()
 	if(BUILD_WITH_LOGGING)
 		set(REQUIRES_PRIVATE "${REQUIRES_PRIVATE} spdlog")
-		set(PRIVATE_LIBS "${PRIVATE_LIB} -lspdlog")
+		set(PRIVATE_LIBS "${PRIVATE_LIBS} -lspdlog")
 	endif()
 	
 	configure_file(AudioPlusPlus.pc.in AudioPlusPlus.pc @ONLY)

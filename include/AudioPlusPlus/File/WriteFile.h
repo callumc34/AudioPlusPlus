@@ -14,9 +14,6 @@ namespace AudioPlusPlus
 			 * @brief      Constructs a new file to write from the input buffer into.
 			 *
 			 * @param[in]  path        The path
-			 * @param[in]  format      The format
-			 * @param[in]  channels    The channels
-			 * @param[in]  samplerate  The samplerate
 			 */
 			IWriteFile(const std::string& path);
 
