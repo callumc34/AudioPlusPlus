@@ -9,12 +9,12 @@ int main(int argc, char** argv)
 		return -1;
 	}
 	AUDIO_INFO("Hello from AudioPlusPlus");
-	AudioPlusPlus::ReadFile file(argv[1]);
-	AUDIO_INFO("File path: " + file.GetFileData()->path);
-	AUDIO_INFO("File Bitrate: " + std::to_string(file.GetTagHandle()->GetAudioProperties()->bitrate()));
-	AUDIO_INFO("File Sample Rate: " + std::to_string(file.GetTagHandle()->GetAudioProperties()->sampleRate()));
-	AUDIO_INFO("File Channels: " + std::to_string(file.GetTagHandle()->GetAudioProperties()->channels()));
-	AUDIO_INFO("File Length: " + std::to_string(file.GetTagHandle()->GetAudioProperties()->lengthInSeconds()));
+	AudioPlusPlus::SndReadFile file(argv[1]);
+	AUDIO_INFO("File path: " + file.GetFileData().path);
+	AUDIO_INFO("File Bitrate: " + std::to_string(file.GetTagHandle().GetAudioProperties()->bitrate()));
+	AUDIO_INFO("File Sample Rate: " + std::to_string(file.GetTagHandle().GetAudioProperties()->sampleRate()));
+	AUDIO_INFO("File Channels: " + std::to_string(file.GetTagHandle().GetAudioProperties()->channels()));
+	AUDIO_INFO("File Length: " + std::to_string(file.GetTagHandle().GetAudioProperties()->lengthInSeconds()));
 
 	//Play audio
 	AUDIO_INFO("Playing from file...");

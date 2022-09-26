@@ -152,7 +152,7 @@ namespace AudioPlusPlus
 		return err;
 	}
 
-	PaError Stream::OpenPlaybackStream(ReadFile& file)
+	PaError Stream::OpenPlaybackStream(IReadFile& file)
 	{
 		if (stream != 0)
 		{
@@ -166,7 +166,7 @@ namespace AudioPlusPlus
 
 		PaStreamParameters OutputParameters{
 			device->GetIndex(),
-			file.GetFileData()->channels,
+			file.GetFileData().channels,
 			paFloat32,
 			device->GetInfo()->defaultLowOutputLatency,
 			NULL
@@ -178,7 +178,7 @@ namespace AudioPlusPlus
 			&stream,
 			nullptr,
 			&OutputParameters,
-			file.GetFileData()->sampleRate,
+			file.GetFileData().sampleRate,
 			paFramesPerBufferUnspecified,
 			paClipOff,
 			&OpenPlaybackStreamCallback,
@@ -192,7 +192,7 @@ namespace AudioPlusPlus
 		return err;
 	}
 
-	PaError Stream::OpenRecordingStream(WriteFile& file)
+	PaError Stream::OpenRecordingStream(IWriteFile& file)
 	{
 		if (stream != 0)
 		{
@@ -217,7 +217,7 @@ namespace AudioPlusPlus
 			&stream,
 			&InputParameters,
 			nullptr,
-			file.GetFileData()->sampleRate,
+			file.GetFileData().sampleRate,
 			paFramesPerBufferUnspecified,
 			paClipOff,
 			&OpenRecordingStreamCallback,

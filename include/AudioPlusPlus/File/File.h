@@ -1,6 +1,5 @@
 #pragma once
 #include <AudioPlusPlus/TagHandle/TagHandle.h>
-#include <sndfile.hh>
 
 namespace AudioPlusPlus
 {
@@ -18,20 +17,15 @@ namespace AudioPlusPlus
 	/**
 	 * @brief      Interface file class for an audio file supported by libsndfile.
 	 */
-	class IFile : protected SndfileHandle
+	class IFile
 	{
 		public:
 			/**
 			 * @brief      Constructs a new audio file instance.
 			 *
-			 * @param[in]  path        The path
-			 * @param[in]  mode        The mode
-			 * @param[in]  format      The format
-			 * @param[in]  channels    The channels
-			 * @param[in]  samplerate  The samplerate
+			 * @param[in]  path        The path.
 			 */
-			IFile(const std::string& path, int mode, int format,
-				int channels = 2, int samplerate = 44100);
+			IFile(const std::string& path);
 
 			/**
 			 * @brief      Destroys the object.
@@ -39,25 +33,25 @@ namespace AudioPlusPlus
 			~IFile();
 
 			/**
-			 * @brief      Gets the TagLib tag handle.
+			 * @brief      Gets the TagLib TagHandle.
 			 *
 			 * @return     The tag handle.
 			 */
-			const TagHandle* GetTagHandle();
+			const TagHandle& GetTagHandle();
 
 			/**
-			 * @brief      Gets the file data.
+			 * @brief      Gets the FileData.
 			 *
 			 * @return     The file data.
 			 */
-			const FileData* GetFileData();
+			const FileData& GetFileData();
 
 			/**
 			 * @brief      Gets the current position, in seconds, of the cursor in the file.
 			 *
 			 * @return     The position.
 			 */
-			double GetPosition();
+			virtual double GetPosition() = 0;
 
 			/**
 			 * @brief      Closes the file.
@@ -66,12 +60,11 @@ namespace AudioPlusPlus
 			 */
 			virtual int Close() = 0;
 
-		private:
-
 		protected:
-			TagHandle* tag;
-			FileData* data;
+			/** TagHandle of the file */
+			TagHandle tag;
 
-			bool closed = false;
+			/** File information */
+			FileData data;
 	};
 }

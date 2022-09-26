@@ -21,39 +21,39 @@ namespace AudioPlusPlus
 			static DeviceManager& Get();
 
 			/**
-			 * @brief      Gets the default output device.
+			 * @brief      Gets the default output Device.
 			 *
-			 * @return     The default output device.
+			 * @return     The default output Device.
 			 */
 			const Device& GetDefaultOutputDevice() const;
 
 			/**
-			 * @brief      Gets the default input device.
+			 * @brief      Gets the default input Device.
 			 *
-			 * @return     The default input device.
+			 * @return     The default input Device.
 			 */
 			const Device& GetDefaultInputDevice() const;
 
 			/**
-			 * @brief      Gets a list of all the devices.
+			 * @brief      Gets a list of all the Devices.
 			 *
-			 * @return     The devices.
+			 * @return     The Devices.
 			 */
 			const std::vector<Device*>& GetDevices() const;
 
 			/**
-			 * @brief      Gets the size of the array containing the devices.
+			 * @brief      Gets the size of the array containing the Devices.
 			 *
-			 * @return     The size of the array containing the devices.
+			 * @return     The size of the array containing the Devices.
 			 */
 			int GetSize() const;
 
 			/**
-			 * @brief      Returns the device at a given index.
+			 * @brief      Returns the Device at a given index.
 			 *
 			 * @param[in]  index  The index
 			 *
-			 * @return     The device.
+			 * @return     The Device.
 			 */
 			const Device& at(int index) const;
 
@@ -61,7 +61,7 @@ namespace AudioPlusPlus
 			DeviceManager();
 			~DeviceManager();
 
-			/* List of AudioPlusPlus devices */
+			/* List of AudioPlusPlus Devices */
 			std::vector<Device*> devices;
 
 			friend class Stream;

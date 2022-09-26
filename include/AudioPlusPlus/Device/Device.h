@@ -11,7 +11,7 @@ namespace AudioPlusPlus
 	{
 		public:
 			/**
-			 * @brief      Checks the two devices are the same.
+			 * @brief      Checks that two Device's are the same.
 			 *
 			 * @param[in]  rhs   The right hand side.
 			 *
@@ -27,32 +27,30 @@ namespace AudioPlusPlus
 			const PaDeviceInfo* GetInfo() const;
 
 			/**
-			 * @brief      Gets the index of the device in PortAudio.
+			 * @brief      Gets the index of the Device in PortAudio.
 			 *
 			 * @return     The index.
 			 */
 			int GetIndex() const;
 
 			/**
-			 * @brief      Determines if the device is in use.
+			 * @brief      Determines if the Device is in use.
 			 *
 			 * @return     True if active, False otherwise.
 			 */
 			bool IsActive() const;
 
-			// Assuming one device can have both input and output channels
-
 			/**
-			 * @brief      Determines if the device is capable of input.
+			 * @brief      Determines if the Device is capable of input.
 			 *
-			 * @return     True if device can input, False otherwise.
+			 * @return     True if Device can input, False otherwise.
 			 */
 			bool IsInput() const;
 
 			/**
-			 * @brief      Determines if the device is capable of output.
+			 * @brief      Determines if the Device is capable of output.
 			 *
-			 * @return     True if output, False otherwise.
+			 * @return     True if Device can output, False otherwise.
 			 */
 			bool IsOutput() const;
 

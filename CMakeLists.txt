@@ -6,7 +6,7 @@ set(VCPKG_OVERLAY_PORTS "${CMAKE_SOURCE_DIR}/ports")
 
 project(
 	"AudioPlusPlus"
-	VERSION 0.2.0
+	VERSION 0.3.0
 	LANGUAGES CXX
 	DESCRIPTION "C++ open source audio playback & recording with file support."
 	HOMEPAGE_URL https://github.com/callumc34/audioplusplus

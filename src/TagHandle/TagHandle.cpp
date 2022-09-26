@@ -7,6 +7,8 @@ namespace AudioPlusPlus
 	{
 		if (!isNull())
 			valid = true;
+		else
+			return;
 
 		fileTag = tag();
 		properties = file()->properties();

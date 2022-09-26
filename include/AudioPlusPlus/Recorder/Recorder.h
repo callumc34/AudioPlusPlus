@@ -12,31 +12,31 @@ namespace AudioPlusPlus
 	{
 		public:
 			/**
-			 * @brief      Load a WriteFile into the input stream.
+			 * @brief      Load a IWriteFile into the input Stream.
 			 *
 			 * @param      file    The file
-			 * @param      stream  The stream
-			 * @param[in]  device  The device
+			 * @param      stream  The Stream
+			 * @param[in]  device  The Device
 			 *
 			 * @return     Error code.
 			 */
-			static int Load(WriteFile& file, Stream& stream,
+			static int Load(IWriteFile& file, Stream& stream,
 				const Device& device = DeviceManager::Get().GetDefaultInputDevice());
 
 			/**
-			 * @brief      Load a WriteFile into a stream and return the corresponding stream.
+			 * @brief      Load a IWriteFile into a Stream and return the corresponding Stream.
 			 *
 			 * @param      file    The file
-			 * @param[in]  device  The device
+			 * @param[in]  device  The Device
 			 *
-			 * @return     The stream the WriteFile is loaded into.
+			 * @return     The Stream the IWriteFile is loaded into.
 			 */
-			static Stream* Load(WriteFile& file, const Device& device = DeviceManager::Get().GetDefaultInputDevice());
+			static Stream* Load(IWriteFile& file, const Device& device = DeviceManager::Get().GetDefaultInputDevice());
 
 			/**
-			 * @brief      Closes recording of a stream.
+			 * @brief      Closes recording of a Stream.
 			 *
-			 * @param      stream  The stream
+			 * @param      stream  The Stream
 			 *
 			 * @return     Error code.
 			 */

@@ -7,7 +7,7 @@ namespace AudioPlusPlus
 	/**
 	 * @brief      Class to write audio encoded data to a file format supported by libsndfile.
 	 */
-	class WriteFile : public IFile
+	class IWriteFile : public IFile
 	{
 		public:
 			/**
@@ -18,13 +18,14 @@ namespace AudioPlusPlus
 			 * @param[in]  channels    The channels
 			 * @param[in]  samplerate  The samplerate
 			 */
-			WriteFile(const std::string& path, int format = SF_FORMAT_WAV | SF_FORMAT_PCM_16,
-				int channels = 2, int samplerate = 44100);
-			~WriteFile();
+			IWriteFile(const std::string& path);
 
-			int Close() override;
+			/**
+			 * @brief      Destructor for a IWriteFile object.
+			 */
+			~IWriteFile();
 
-		private:
+		protected:
 			/**
 			 * @brief      Write from the port audio input buffer to a file.
 			 *
@@ -37,14 +38,14 @@ namespace AudioPlusPlus
 			 *
 			 * @return     1 if finished else 0.
 			 */
-			int WriteToBuffer(
+			virtual int WriteToBuffer(
 				const void* inputBuffer, void* outputBuffer,
 				unsigned long framesPerBuffer,
 				const PaStreamCallbackTimeInfo* timeInfo,
 				PaStreamCallbackFlags statusFlags,
 				void* userData
-			);
+			) = 0;
 
-		friend class Stream;
+			friend class Stream;
 	};
 }

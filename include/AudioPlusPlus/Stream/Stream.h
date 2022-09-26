@@ -15,7 +15,7 @@ namespace AudioPlusPlus
 	{
 		public:
 			/**
-			 * @brief      Configuration options for the stream.
+			 * @brief      Configuration options for the Stream.
 			 */
 			struct StreamConfig
 			{
@@ -28,12 +28,12 @@ namespace AudioPlusPlus
 				double start = 0;
 				double end = 0;
 
-				ReadFile* rFile = nullptr;
-				WriteFile* wFile = nullptr;
+				IReadFile* rFile = nullptr;
+				IWriteFile* wFile = nullptr;
 			};
 
 			/**
-			 * @brief      Check if stream is not null.
+			 * @brief      Check if Stream is not null.
 			 */
 			operator bool() const;
 
@@ -45,16 +45,16 @@ namespace AudioPlusPlus
 			PaStream** GetBuffer();
 
 			/**
-			 * @brief      Sets the device of the stream.
+			 * @brief      Sets the Device of the stream.
 			 *
-			 * @param[in]  index  The index of the device in DeviceManager.
+			 * @param[in]  index  The index of the Device in DeviceManager.
 			 *
 			 * @return     The pa error code.
 			 */
 			PaError SetDevice(int index);
 
 			/**
-			 * @brief      Sets the device of the stream.
+			 * @brief      Sets the Device of the stream.
 			 *
 			 * @param[in]  device  The Device.
 			 *
@@ -63,23 +63,23 @@ namespace AudioPlusPlus
 			PaError SetDevice(const Device& device);
 
 			/**
-			 * @brief      Gets the current device the stream is using.
+			 * @brief      Gets the current Device the stream is using.
 			 *
 			 * @return     The Device.
 			 */
 			const Device* GetDevice();
 
 			/**
-			 * @brief      Set the volume of the stream.
+			 * @brief      Set the volume of the Stream.
 			 *
 			 * @param[in]  v     The new value
 			 *
-			 * @return     Returns the new volume of the stream.
+			 * @return     Returns the new volume of the Stream.
 			 */
 			double SetVolume(double v);
 
 			/**
-			 * @brief      Gets the volume of the stream.
+			 * @brief      Gets the volume of the Stream.
 			 *
 			 * @return     The volume.
 			 */
@@ -90,12 +90,12 @@ namespace AudioPlusPlus
 			 *
 			 * @param[in]  position  The position, in seconds.
 			 *
-			 * @return     The new position in the stream.
+			 * @return     The new position in the Stream.
 			 */
 			double SetPosition(double position);
 
 			/**
-			 * @brief      Gets the position of the stream in the file in seconds.
+			 * @brief      Gets the position of the Stream in the file in seconds.
 			 *
 			 * @return     The position, in seconds.
 			 */
@@ -117,21 +117,21 @@ namespace AudioPlusPlus
 			int StopLoop();
 
 			/**
-			 * @brief      Starts the stream.
+			 * @brief      Starts the Stream.
 			 *
 			 * @return     The pa error code.
 			 */
 			PaError Start();
 
 			/**
-			 * @brief      Stops/pauses the stream.
+			 * @brief      Stops/pauses the Stream.
 			 *
 			 * @return     The pa error code.
 			 */
 			PaError Stop();
 
 			/**
-			 * @brief      Closes the stream.
+			 * @brief      Closes the Stream.
 			 *
 			 * @return     The pa error code.
 			 */
@@ -139,32 +139,32 @@ namespace AudioPlusPlus
 
 		private:
 			/**
-			 * @brief      Constructs a new stream.
+			 * @brief      Constructs a new Stream.
 			 */
 			Stream();
 
 			/**
-			 * @brief      Destroys the stream.
+			 * @brief      Destroys the Stream.
 			 */
 			~Stream();
 
 			/**
-			 * @brief      Opens a playback stream.
+			 * @brief      Opens a playback Stream.
 			 *
-			 * @param      file  The ReadFile
+			 * @param      file  The IReadFile to use.
 			 *
 			 * @return     The pa error code.
 			 */
-			PaError OpenPlaybackStream(ReadFile& file);
+			PaError OpenPlaybackStream(IReadFile& file);
 
 			/**
-			 * @brief      Opens a recording stream.
+			 * @brief      Opens a recording Stream.
 			 *
-			 * @param      file  The WriteFile
+			 * @param      file  The IWriteFile to use.
 			 *
 			 * @return     The pa error code.
 			 */
-			PaError OpenRecordingStream(WriteFile& file);
+			PaError OpenRecordingStream(IWriteFile& file);
 
 			/**
 			 * @brief      Callback function for portaudio to begin audio playback.
@@ -209,13 +209,13 @@ namespace AudioPlusPlus
 			/** The internal stream */
 			PaStream* stream = 0;
 
-			/** Current device */
+			/** Current Device */
 			Device* device = nullptr;
 
-			/** Current stream config */
+			/** Current StreamConfig in use. */
 			StreamConfig config;
 
-			/** If the stream is active */
+			/** If the Stream is active. */
 			bool active = false;
 
 			/**

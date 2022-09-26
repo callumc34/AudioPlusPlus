@@ -7,7 +7,7 @@ namespace AudioPlusPlus
 	/**
 	 * @brief      Class to read audio data from a file supported by libsndfile
 	 */
-	class ReadFile : public IFile
+	class IReadFile : public IFile
 	{
 		public:
 			/**
@@ -15,12 +15,10 @@ namespace AudioPlusPlus
 			 *
 			 * @param[in]  path  The file path
 			 */
-			ReadFile(const std::string& path);
-			~ReadFile();
+			IReadFile(const std::string& path);
+			~IReadFile();
 
-			int Close() override;
-
-		private:
+		protected:
 			/**
 			 * @brief      Reads from the file to the portaudio buffer.
 			 *
@@ -33,13 +31,13 @@ namespace AudioPlusPlus
 			 *
 			 * @return     1 if file is fully read else 0.
 			 */
-			int ReadToBuffer(
+			virtual int ReadToBuffer(
 				const void* inputBuffer, void* outputBuffer,
 				unsigned long framesPerBuffer,
 				const PaStreamCallbackTimeInfo* timeInfo,
 				PaStreamCallbackFlags statusFlags,
 				void* userData
-			);
+			) = 0;
 
 			friend class Stream;
 	};

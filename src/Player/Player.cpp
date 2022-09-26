@@ -2,14 +2,14 @@
 
 namespace AudioPlusPlus
 {
-	int Player::Load(ReadFile& file, Stream& stream, const Device& device)
+	int Player::Load(IReadFile& file, Stream& stream, const Device& device)
 	{
 		return stream.OpenPlaybackStream(file);
 	}
 
-	Stream* Player::Load(ReadFile& file, const Device& device)
+	Stream* Player::Load(IReadFile& file, const Device& device)
 	{
-		Stream* stream = StreamManager::Get().NewStream(file.GetFileData()->path);
+		Stream* stream = StreamManager::Get().NewStream(file.GetFileData().path);
 		stream->OpenPlaybackStream(file);
 		return stream;
 	}

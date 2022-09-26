@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 	AUDIO_INFO("Recording to file: " + std::string(argv[1]));
 
 
-	AudioPlusPlus::WriteFile file(argv[1]);
+	AudioPlusPlus::SndWriteFile file(argv[1]);
 
 
 	AudioPlusPlus::Stream* stream = AudioPlusPlus::Recorder::Load(file);

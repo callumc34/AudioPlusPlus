@@ -1,26 +1,32 @@
 #pragma once
-//Devices
+// Devices
 #include <AudioPlusPlus/Device/DeviceManager.h>
 
-//Files
-#include <AudioPlusPlus/File/ReadFile.h>
-#include <AudioPlusPlus/File/WriteFile.h>
+// Exceptions
+#include <AudioPlusPlus/Exceptions/Exception.h>
 
-//Log
+// Files
+#include <AudioPlusPlus/File/SndReadFile.h>
+#include <AudioPlusPlus/File/SndWriteFile.h>
+
+// Log
 #include <AudioPlusPlus/Log/Log.h>
 
-//Player
+// Player
 #include <AudioPlusPlus/Player/Player.h>
 
-//Recorder
+// Recorder
 #include <AudioPlusPlus/Recorder/Recorder.h>
 
-//Streams
+// Streams
 #include <AudioPlusPlus/Stream/StreamManager.h>
 
-//Tagging
+// Tagging
 #include <AudioPlusPlus/TagHandle/TagHandle.h>
 
+/**
+ * Namespace for all AudioPlusPlus objects.
+ */
 namespace AudioPlusPlus
 {
 	/**

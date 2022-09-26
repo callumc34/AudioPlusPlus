@@ -21,9 +21,9 @@ namespace AudioPlusPlus
 			static StreamManager& Get();
 
 			/**
-			 * @brief      Get a Strean from the given name.
+			 * @brief      Get a Stream from the given name.
 			 *
-			 * @param[in]  name  The name of the stream.
+			 * @param[in]  name  The name of the Stream.
 			 *
 			 * @return     The Stream.
 			 */
@@ -32,7 +32,7 @@ namespace AudioPlusPlus
 			/**
 			 * @brief      Create a new Stream with a given name.
 			 *
-			 * @param[in]  name  The name of the stream.
+			 * @param[in]  name  The name of the Stream.
 			 *
 			 * @return     The created Stream.
 			 */
@@ -60,7 +60,7 @@ namespace AudioPlusPlus
 			StreamManager();
 			~StreamManager();
 
-			/** Map of the stream */
+			/** Map of the Streams */
 			std::unordered_map<std::string, Stream*> streams;
 	};
 }
